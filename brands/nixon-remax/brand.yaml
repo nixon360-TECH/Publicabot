@@ -1,0 +1,29 @@
+# Fuente: docs/style/STYLE_DECISIONS.md (2026-11-12)
+brand: nixon-remax
+accounts: [instagram_remax, facebook_page]
+feel: editorial_limpio_confiable
+colors:
+  primary_navy: "#1B2A4A"     # siempre dominante
+  white: "#FFFFFF"
+  bone: "#FAF7F2"             # hueso
+  black_support: "#000000"
+  red_accent: "#E2001A"       # opcional, solo cierre/CTA
+red_usage: closing_only
+logo: official_file_only      # nunca recolorear ni recrear
+fonts:
+  headline: PENDIENTE  # Fraunces | Playfair Display (PROPUESTO)
+  body: Inter
+subtitles: word_by_word_dynamic   # plantillas desde refs R1-R4 (PENDIENTE)
+tone: profesional_cercano_usted
+caption: medio_con_vinetas
+hashtags: {min: 10, max: 15}
+cta: "Escríbame por WhatsApp"
+public_contact: "+50379564399"
+reel_duration_sec:
+  terreno: [20, 30]
+  casa_apartamento: [30, 45]
+  propiedad_grande: [45, 60]
+pace_sec_per_shot: [2, 3]
+color_grade: natural_neutral
+transitions: segun_pieza
+variants: {count: 3, scope: "hook_0-3s + portada"}  # scope PROPUESTO

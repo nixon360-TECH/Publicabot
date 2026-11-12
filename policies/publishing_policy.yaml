@@ -1,0 +1,8 @@
+default_mode: HANDOFF          # Nixon programa en Meta Business Suite
+scheduler: meta_business_suite_manual
+api_publishing: phase_4_requires_separate_authorization
+review_window_local: "08:00"   # America/El_Salvador; borradores listos antes
+approval_required: [content_version, caption, cta, price, target_account]
+ai_voice_or_avatar: written_authorization_per_piece
+sky_replacement: ask_each_time
+virtual_staging: allowed_with_label "Ambientación ilustrativa"
