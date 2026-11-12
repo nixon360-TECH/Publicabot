@@ -14,8 +14,10 @@
 | FFmpeg | OBSERVADO: instalado 2026-11-11 vía winget (`Gyan.FFmpeg` 9.0.2 full) | `ffmpeg -version`; ffprobe disponible |
 | FilmCraft | OBSERVADO: v0.20.1 (MSI x64, SHA256 verificado y firma Authenticode válida) | `%LOCALAPPDATA%\Programs\ArtCraft\FilmCraft\filmcraft-cli.exe` |
 | MCP `filmcraft` | OBSERVADO: registrado (scope local del proyecto) y `Connected` en `claude mcp list` | No probado aún con un clip real |
-| Whisper / Auto-Editor | NO INSTALADOS (no hay Python real; solo alias de Microsoft Store) | FilmCraft trae Whisper integrado; ver OPEN_QUESTIONS #10 |
-| DaVinci Resolve | NO INSTALADO | — |
+| Python | OBSERVADO: 3.12.10 instalado 2026-11-12 vía winget (`Python.Python.3.12`, scope usuario) | `python --version` |
+| Auto-Editor | OBSERVADO: 29.3.1 (licencia Unlicense) instalado con pip; `Scripts` añadido al PATH de usuario | `auto-editor --version` |
+| Whisper | Usar el integrado de FilmCraft (Rust, CPU). No se instaló `faster-whisper`/`openai-whisper` aparte (PyTorch pesa varios GB y C: tiene ~8 GB libres) | ver OPEN_QUESTIONS #10 |
+| DaVinci Resolve | NO INSTALADO a propósito: gratis pero no open-source, exige GPU y espacio que C: no tiene; FilmCraft + FFmpeg cubren el stack aprobado | reconsiderar si se libera C: |
 | REconnect | NO CONECTADO | export/API PENDIENTE |
 | Meta Business Suite | Lo usa Nixon para programar | — |
 | Meta Marketing API / Google Ads API | NO CONECTADO | Fase 4 |
