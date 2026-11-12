@@ -1,0 +1,9 @@
+paid_subscriptions_allowed: [chatgpt, claude]
+everything_else: free_or_open_source_audited
+ads:
+  platforms_order: [meta, google]
+  objective: whatsapp_messages
+  rule: nixon_approves_each_campaign_amount_and_dates
+  max_daily_spend_usd: PENDIENTE
+  max_monthly_spend_usd: PENDIENTE
+higgsfield: disabled_by_default

@@ -1,0 +1,8 @@
+brand: nixon-oly
+accounts: [instagram_oly, facebook_personal]
+style: vlog_documental_crudo_cuidado
+colors:
+  signature: azules_agua       # tonos exactos PENDIENTE de plantilla
+fonts: {headline: PENDIENTE, body: Inter}
+subtitles: word_by_word_dynamic
+real_estate_in_oly: solo_reels_colaborativos_propiedades_top

@@ -1,0 +1,145 @@
+# PublicaBOT — STYLE_DECISIONS
+# Fuente: cuestionario de Nixon, 2026-11-12
+# Estado: CONFIRMADO_USUARIO salvo valores PENDIENTE
+
+# A · Identidad visual general
+remax_feel:
+  choice: "Editorial limpio y confiable"
+  matches_recommendation: true
+remax_palette:
+  note: "navy blanco negro y quizas rojo al final. pero me gustaria llevarlo en navy/blanco,huevo"
+oly_palette:
+  choice: "Azules/agua como firma"
+  matches_recommendation: false
+typography:
+  choice: "Serif editorial + sans de apoyo"
+  matches_recommendation: false
+refs_visual: "https://www.tiktok.com/@melissaortarealtor/video/7591889708972543262?is_from_webapp=1&sender_device=pc&web_id=7707132042735666709 de este me gusta el estilo de como muestra propiedades https://www.tiktok.com/@kelssie3/video/7589249524674071838is_from_webapp=1&sender_device=pc&web_id=7707132042735666709 este tambien me gusta como muestra ese tipo de letras que cambia con el fondo lo quiero https://www.tiktok.com/@grupoinevita/video/7543702115584052500?is_from_webapp=1&sender_device=pc&web_id=7707132042735666709 https://www.tiktok.com/@nacho.jauz/video/7446847131442253061?is_from_webapp=1&sender_device=pc&web_id=7707132042735666709 en este como hablan y aparecen los textos asi, quisiera que siempre mande el azul como mi color"
+
+# B · Fotografía de inmuebles
+photo_retouch:
+  choice: "Natural: luz, color, enderezar líneas"
+  matches_recommendation: true
+sky_replace:
+  note: "cuando sea necesario, preguntar, dejar la opcion"
+photo_overlay:
+  choice: "Precio + zona + logo pequeño en esquina"
+  matches_recommendation: true
+virtual_staging:
+  choice: "Sí, con etiqueta «Ambientación ilustrativa»"
+  matches_recommendation: false
+drone:
+  choice: "Apertura aérea cuando haya permiso y valor"
+  matches_recommendation: true
+
+# C · Video y edición
+reel_len_property:
+  choice: "30–45 s"
+  matches_recommendation: false
+  note: "las 3 opciones me parecen dependiendo de la propiedad, ya que un terreno es mas facil que una casa con piscina por ejemplo"
+pace:
+  choice: "Medio: 2–3 s por toma"
+  matches_recommendation: true
+hook_style:
+  choice:
+    - "Tú a cámara con el dato clave"
+    - "Toma de dron impactante + precio en pantalla"
+    - "Pregunta al comprador"
+    - "Detalle visual llamativo (vista, piscina, cocina)"
+  matches_recommendation: true
+  note: "investigar que funcionan, que frases estan a la vanguardia y no cerrarse a no usar viral hooks fuera de lo normal para vender, ser muy creativo"
+nixon_presence:
+  choice: "Intro y cierre a cámara, recorrido con voz en off"
+  matches_recommendation: true
+transitions:
+  choice: "Mezcla según pieza"
+  matches_recommendation: false
+color_grade:
+  choice: "Natural neutra"
+  matches_recommendation: true
+
+# D · Subtítulos y texto en pantalla
+subs_mode:
+  choice: "Palabra por palabra resaltada"
+  matches_recommendation: false
+  note: "subtitulos dinamicos, que cambien de fondo y estilo y que atrapen, de manera viral en tiktok e instagram"
+subs_look:
+  note: "Dinamicos, vamos a descargar plantillas segun los videos que subi"
+
+# E · Audio
+music:
+  choice: "Biblioteca libre de derechos (YouTube Audio Library, Pixabay)"
+  matches_recommendation: true
+voice:
+  choice: "Voz IA clonada (requiere tu autorización por escrito)"
+  matches_recommendation: false
+
+# F · Copy y tono
+copy_tone:
+  choice: "Profesional cercano, de usted"
+  matches_recommendation: true
+caption_len:
+  choice: "Medio con viñetas de ficha"
+  matches_recommendation: false
+  note: "dependiendo tambien de la pieza."
+hashtags:
+  choice: "10–15"
+  matches_recommendation: false
+cta:
+  choice: "«Escríbame por WhatsApp» con link wa.me rastreable"
+  matches_recommendation: true
+forbidden_words: PENDIENTE
+
+# G · Cuenta personal OLY
+oly_style:
+  choice: "Documental tipo vlog, crudo pero cuidado"
+  matches_recommendation: true
+oly_crosspost:
+  choice: "Solo Reels colaborativos con propiedades top"
+  matches_recommendation: false
+
+# H · Uso de IA generativa
+genai_visual:
+  choice: "Solo apoyo: gráficos de datos, fondos, B-roll conceptual no inmobiliario"
+  matches_recommendation: true
+avatar:
+  choice: "Sí, con autorización explícita por pieza"
+  matches_recommendation: false
+
+# I · Revisión y aprobación
+variants:
+  choice: "3 variantes A/B/C"
+  matches_recommendation: false
+review_device:
+  choice: "Ambos por igual"
+  matches_recommendation: false
+publish_mode:
+  choice: "Programado en Meta Business Suite (gratis)"
+  matches_recommendation: false
+review_window: "8am"
+
+# J · Herramientas y costo
+budget_tools:
+  choice: "Solo ChatGPT + Claude; todo lo demás gratis/open-source"
+  matches_recommendation: true
+premium_editor:
+  choice: "DaVinci Resolve (versión gratuita)"
+  matches_recommendation: true
+  note: "cualquier otro tipo de editor, creo que en claude code hay uno que se llama videograph que es una copia de adobe premiere"
+templates_engine:
+  choice: "FFmpeg + plantillas propias en código (100 % open-source)"
+  matches_recommendation: true
+
+# K · Publicidad (Meta / Google)
+ads_platform:
+  choice: "Meta (IG + FB) primero"
+  matches_recommendation: true
+ads_objective:
+  choice: "Mensajes a WhatsApp"
+  matches_recommendation: true
+ads_access:
+  choice: "APIs oficiales gratis (Meta Marketing API + Google Ads API) dentro de publicabot"
+  matches_recommendation: true
+ads_budget_rule:
+  choice: "Apruebo cada campaña con monto y fecha"
+  matches_recommendation: true
