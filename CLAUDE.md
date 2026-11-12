@@ -8,6 +8,8 @@
   - `property-reel`: Reel de propiedad, de la ficha verificada al paquete HANDOFF.
   - `organic-reel-edit`: Reel personal de @nixonhernandez_.
   - `prepublish-qa`: obligatoria antes de marcar una pieza como `READY_FOR_REVIEW`.
+  - `filmcraft-edit`: montaje de clips reales con FilmCraft por MCP (alpha, con respaldo FFmpeg).
+- Instalación en la PC: `docs/setup/WINDOWS_SETUP.md`. Stack de video: `docs/tools/VIDEO_STACK.md`.
 - Si se trabaja desde Dispatch (celular → PC): la PC debe estar encendida y la app abierta. Si falta acceso a `MEDIA_ROOT`, dilo en lugar de suponer.
 - Al cerrar una sesión de trabajo, entrega el resumen en este formato: hecho / probado / pendiente / necesita aprobación / evidencia.
 - Habla con Nixon en español y de forma directa. A los clientes, en los textos, siempre se les trata **de usted**.

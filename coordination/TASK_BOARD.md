@@ -11,5 +11,6 @@
 | N360-019 | P1 | Analizar refs R1–R4 → plantillas de subtítulos/texto | claude-code | BLOCKED (grabaciones) |
 | N360-020 | P1 | Investigación de ganchos virales inmobiliarios actuales | claude / chatgpt | TODO |
 | N360-021 | P2 | Evaluar voz IA open-source local (licencia, calidad) | claude-code | TODO |
-| N360-022 | P2 | Identificar/auditar «videograph» | claude | BLOCKED (nombre) |
+| N360-022 | P1 | Stack de video: FilmCraft identificado e investigado | claude | IN_REVIEW (VIDEO_STACK.md) |
+| N360-023 | P0 | Piloto Santa Isabel con FilmCraft (dron + fotos reales) | claude-code | TODO (tras N360-001) |
 | N360-013 | P2 | Meta Marketing API / Google Ads API (Fase 4) | — | TODO |

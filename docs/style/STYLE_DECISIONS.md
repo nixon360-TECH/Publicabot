@@ -130,8 +130,9 @@
 |---|---|---|
 | Presupuesto de software | **Solo ChatGPT + Claude.** Todo lo demás debe ser gratuito u open-source | CONFIRMADO |
 | Editor premium | DaVinci Resolve (versión gratuita) | CONFIRMADO |
-| Otros editores | Nixon mencionó "videograph", una alternativa a Premiere en Claude Code. **No está identificado ni verificado:** auditar nombre, repo, licencia y mantenimiento antes de usarlo | PENDIENTE_VERIFICAR (N360-022) |
+| Otros editores | El editor que mencionó Nixon es **FilmCraft** (`storytold/filmcraft`, suite ArtCraft, Apache-2.0/MIT, se maneja por MCP). Se usará como editor principal, por ahora en alpha. Ver `docs/tools/VIDEO_STACK.md` | CONFIRMADO_USUARIO (herramienta) / PROPUESTO (stack) |
 | Motor de plantillas | FFmpeg + plantillas propias en código (100 % open-source) | CONFIRMADO |
+| Capa de subtítulos y diseño | **Remotion** para subtítulos dinámicos y texto con mezcla. Es gratis para Nixon como individuo, pero no es open-source puro | PROPUESTO: requiere visto bueno |
 | Higgsfield | Fuera del flujo por defecto (es de pago). Solo con autorización puntual | Derivado de la regla de costo |
 
 ---
