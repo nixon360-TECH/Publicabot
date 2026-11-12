@@ -3,7 +3,7 @@
 | ID | P | Tarea | Owner | Estado |
 |---|---|---|---|---|
 | N360-000 | P0 | Base del repo (contexto, estilo, reglas, skills) | claude | IN_REVIEW (PR) |
-| N360-001 | P0 | Auditoría PC: specs, MEDIA_ROOT, FFmpeg/Whisper/Auto-Editor/DaVinci | claude-code (local) | TODO |
+| N360-001 | P0 | Auditoría PC: specs, MEDIA_ROOT, FFmpeg/Whisper/Auto-Editor/DaVinci | claude-code (local) | IN_REVIEW (rama `feature/N360-001-pc-audit`) |
 | N360-003 | P0 | Propiedad piloto verificada | Nixon | TODO |
 | N360-004 | P0 | Primer clip orgánico al INBOX | Nixon | TODO |
 | N360-005 | P0 | Reel orgánico v1 (organic-reel-edit) | claude-code | TODO |
