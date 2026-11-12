@@ -130,9 +130,9 @@
 |---|---|---|
 | Presupuesto de software | **Solo ChatGPT + Claude.** Todo lo demás debe ser gratuito u open-source | CONFIRMADO |
 | Editor premium | DaVinci Resolve (versión gratuita) | CONFIRMADO |
-| Otros editores | El editor que mencionó Nixon es **FilmCraft** (`storytold/filmcraft`, suite ArtCraft, Apache-2.0/MIT, se maneja por MCP). Se usará como editor principal, por ahora en alpha. Ver `docs/tools/VIDEO_STACK.md` | CONFIRMADO_USUARIO (herramienta) / PROPUESTO (stack) |
+| Otros editores | El editor que mencionó Nixon es **FilmCraft** (`storytold/filmcraft`, suite ArtCraft, Apache-2.0/MIT, se maneja por MCP). Se usará como editor principal, por ahora en alpha. Ver `docs/tools/VIDEO_STACK.md` | CONFIRMADO_USUARIO (2026-11-12) |
 | Motor de plantillas | FFmpeg + plantillas propias en código (100 % open-source) | CONFIRMADO |
-| Capa de subtítulos y diseño | **Remotion** para subtítulos dinámicos y texto con mezcla. Es gratis para Nixon como individuo, pero no es open-source puro | PROPUESTO: requiere visto bueno |
+| Capa de subtítulos y diseño | **Remotion** para subtítulos dinámicos y texto con mezcla. Es gratis para Nixon como individuo, pero no es open-source puro Las piezas las produce Nixon como individuo, lo que permite la licencia gratuita | CONFIRMADO_USUARIO (2026-11-12) |
 | Higgsfield | Fuera del flujo por defecto (es de pago). Solo con autorización puntual | Derivado de la regla de costo |
 
 ---

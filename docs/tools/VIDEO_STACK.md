@@ -1,6 +1,6 @@
 # VIDEO_STACK — herramientas de edición (investigación 2026-11-12)
 
-Estado: **PROPUESTO**, pendiente de aprobación de Nixon. Todas las herramientas son gratuitas. Ninguna está instalada todavía.
+Estado: **CONFIRMADO_USUARIO (2026-11-12)**: Nixon aprueba FilmCraft + Remotion + FFmpeg y produce como individuo (licencia gratuita de Remotion). Todas las herramientas son gratuitas. Ninguna está instalada todavía.
 
 ## Hallazgo principal: ArtCraft "Crafting Apps" (storytold)
 Es una suite open-source escrita en Rust, con licencia dual Apache-2.0 + MIT. Corre en Windows, macOS, Linux y navegador.
