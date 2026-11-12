@@ -1,0 +1,44 @@
+# Secretos y entorno local
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+credentials*.json
+token*.json
+
+# Medios (viven en MEDIA_ROOT / disco externo, nunca en Git)
+*.mp4
+*.mov
+*.MOV
+*.mkv
+*.wav
+*.mp3
+*.m4a
+*.braw
+*.insv
+*.dng
+*.heic
+*.HEIC
+media/
+MEDIA_ROOT/
+
+# Datos runtime y PII
+*.sqlite
+*.sqlite3
+*.db
+data/
+exports/
+leads*.csv
+crm*.csv
+
+# Sistema / herramientas
+node_modules/
+__pycache__/
+.venv/
+venv/
+dist/
+build/
+.DS_Store
+Thumbs.db
+*.log
