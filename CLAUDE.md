@@ -14,6 +14,7 @@
   - `design-dna`: extraer el estilo de una imagen de referencia a tokens y mock.
   - `motion-design`: ritmo, easing y SFX de cada elemento.
   - `genjutsu-polish`: pasada final de dirección creativa antes de revisión.
+  - `antislop` (núcleo), `antislop-copywriting` (textos y anuncios), `antislop-ui`, `antislop-human` (contraste y accesibilidad), `antislop-layoutmobile`, `antislop-code`: filtro contra el texto y diseño genérico de IA. Revisar con `antislop-copywriting` los guiones y copys antes de `prepublish-qa`. Fuente: miqdadbadjuber/anti-slop (MIT), ver `.claude/skills/antislop/ORIGEN.md`.
 - Instalación en la PC: `docs/setup/WINDOWS_SETUP.md`. Stack de video: `docs/tools/VIDEO_STACK.md`.
 - Si se trabaja desde Dispatch (celular → PC): la PC debe estar encendida y la app abierta. Si falta acceso a `MEDIA_ROOT`, dilo en lugar de suponer.
 - Al cerrar una sesión de trabajo, entrega el resumen en este formato: hecho / probado / pendiente / necesita aprobación / evidencia.
