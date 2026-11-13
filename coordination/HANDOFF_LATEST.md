@@ -1,4 +1,19 @@
-# HANDOFF — 2026-11-12 — N360-026
+# HANDOFF — 2026-11-13 — N360-027
+
+- **Confirmado por Nixon:** sustituir la paleta verde de Santa Isabel por azul y amarillo en artes, identidad y sitio web; conservar el contraste que le gustó en la campaña.
+- **Paleta fuente:** navy `#1B2A4A`, azul oscuro `#111D35`, apoyo `#2F5286`, amarillo `#ECD628`, blanco `#FFFFFF`. Fotografías naturales; logos oficiales de RE/MAX y Banco Industrial intactos.
+- **Identidad entregada:** logo horizontal, vertical e icono en versiones clara/oscura, perfil y portada de Facebook en `05_RENDERS_DRAFT/N360-20261112-0001/codex_identidad_azul_amarillo_v01/` relativa a `E:\NIXON360_CONTENTOPS`.
+- **Campaña entregada:** 41 diseños regenerados en `codex_artes_15d_azul_amarillo_v03/`, con ZIP de 31.5 MB, calendario, copys, tres carruseles y tres variantes de pauta. QA: dimensiones, decodificación, zonas seguras, datos, hashes y revisión visual aprobados. Sin publicación ni gasto.
+- **Sitio web:** código original de `lotificacionsantaisabel.com` recuperado desde ChatGPT Sites. Versión local azul/amarilla completa: UI, botones, favicon, logo derivado, mapa, plano SVG y catálogo PDF. Se preservaron inventario, contactos, fotografías, lógica de financiamiento y logos de terceros.
+- **Probado:** 20/20 pruebas del sitio, chequeos de sintaxis, revisión móvil en navegador y render visual de las dos páginas del catálogo PDF. No quedan referencias principales a la antigua paleta verde en los recursos de interfaz actualizados.
+- **Despliegue autorizado y ejecutado:** Nixon autorizó expresamente publicar N360-027. ChatGPT Sites versión 19, commit fuente `0387db36b66028fba7a707c8de4fe75b39b04410`, desplegada el 13 de noviembre de 2026.
+- **Verificación pública:** `https://lotificacionsantaisabel.com` responde 200 y entrega `styles.css?v=20261112-azul-amarillo`, favicon azul, navy `#1B2A4A` y amarillo `#ECD628`; no entrega el antiguo verde primario. Revisión visual de escritorio aprobada.
+- **Estado:** `DONE`. No se publicaron artes en redes ni se activó pauta; esos pasos mantienen aprobación separada.
+- **Evidencia:** `brands/santa-isabel/palette.json`, `scripts/codex_identidad_santa_isabel.py`, `scripts/codex_artes_15d.py`, `docs/tools/SANTA_ISABEL_PALETA_AZUL.md`.
+
+---
+
+## Handoff anterior — 2026-11-12 — N360-026
 
 - **Confirmado por Nixon:** solo Santa Isabel; ampliar el kit actual; incluir varias fotos en un solo arte. Producir los artes aquí y dejar los videos con Claude. Chat identificado como **NBS publicabot CHATGPT**.
 - **Hecho:** 41 diseños para 15 días (12–26 nov.), con 15 publicaciones y sus historias, siete láminas adicionales para tres carruseles y dos variantes adicionales de pauta en ambos formatos. Collages con fotos limpias; logos oficiales; sin fechas dentro del arte. Copy IG/FB, calendario, galería y ZIP.

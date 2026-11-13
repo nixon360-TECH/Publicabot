@@ -20,4 +20,5 @@
 | Meta Business Suite | Lo usa Nixon para programar | — |
 | Meta Marketing API / Google Ads API | NO CONECTADO | Fase 4 |
 | Repos hermanos: Buscabot-NBS, santa-isabel-sitio, santa-isabel-media-ops | HISTÓRICO (vistos el 8-nov) | no auditados aún |
+| Sitio `lotificacionsantaisabel.com` | PUBLICADO 2026-11-13: ChatGPT Sites versión 19, identidad azul/amarilla N360-027 | Dominio responde 200; nuevo CSS, favicon y catálogo confirmados; 20 pruebas pasan |
 | Chat previo «PublicaBOT» | NO ENCONTRADO | Nixon lo traerá |

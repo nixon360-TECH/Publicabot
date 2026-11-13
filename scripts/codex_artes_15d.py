@@ -26,11 +26,13 @@ def sha(path):
 
 
 class Artist:
-    def __init__(self, source, project, kit_path):
+    def __init__(self, source, project, kit_path, brand_assets=None):
         self.source, self.project = source, project
         self.kit = json.loads(kit_path.read_text(encoding="utf8"))
-        self.yellow = self.kit["colores"]["acento_amarillo"]
-        self.cream = self.kit["colores"]["crema_conector"]
+        self.palette = json.loads((REPO/"brands/santa-isabel/palette.json").read_text(encoding="utf8"))
+        self.yellow = self.palette["colors"]["yellow"]
+        self.cream = self.palette["colors"]["white"]
+        self.brand_assets = brand_assets
         self.used = {}
         self.bounds = []
         self.fonts = {"impact": "impact.ttf", "serif": "georgiai.ttf", "body": "segoeui.ttf", "bold": "seguibl.ttf"}
@@ -134,7 +136,7 @@ class Artist:
             stops=[(0,205),(300,185),(540,65),(800,60),(855,205),(1125,250),(1350,240)]
         image=self.tint(image,stops)
         compact = not tall and post.get("layout")=="collage"
-        self.logo(image,self.project/"assets/logo_si_horizontal.png",310 if compact else 270,270 if tall else 135,460 if compact else 540)
+        self.logo(image,(self.brand_assets/"logo_si_horizontal_claro.png") if self.brand_assets else self.project/"assets/logo_si_horizontal.png",310 if compact else 270,270 if tall else 135,460 if compact else 540)
         self.text(image,"Comacarán, San Miguel",540,405 if tall else (255 if compact else 270),29,font="body",color=self.cream)
         self.text(image,post["kicker"],540,465 if tall else (300 if compact else 322),44 if tall else 38,font="serif",color=self.cream)
         lines = post["title"]
@@ -189,6 +191,7 @@ def main():
     ap.add_argument("--photos",type=Path,required=True)
     ap.add_argument("--project",type=Path,required=True)
     ap.add_argument("--output",type=Path,required=True)
+    ap.add_argument("--brand-assets",type=Path,help="Carpeta del kit azul/amarillo generado por codex_identidad_santa_isabel.py")
     ap.add_argument("--pilot",action="store_true")
     args=ap.parse_args()
     if args.output.exists():
@@ -201,7 +204,7 @@ def main():
     assert snapshot["status"].startswith("VERIFIED")
     assert (facts["price_from_usd"],facts["min_lot_size_varas2"],facts["water_connected"],facts["with_deed"])==(24500,286,True,True)
     assert snapshot["contact"]=="+503 7956 4399"
-    artist=Artist(args.photos,args.project,kit_path)
+    artist=Artist(args.photos,args.project,kit_path,args.brand_assets)
     args.output.mkdir(parents=True)
     for folder in ("feed_4x5","historias_9x16","pauta_inicial","copys","revision"):
         (args.output/folder).mkdir()
@@ -241,6 +244,7 @@ def main():
     write_json(args.output/"calendario.json",calendar)
     write_json(args.output/"ficha_publica.json",{"source":snapshot["source"],"public_facts":facts,"contact":snapshot["contact"]})
     manifest={"agente":"codex / NBS publicabot CHATGPT","fecha_hora":datetime.now(timezone(timedelta(hours=-6))).isoformat(),
+              "palette":artist.palette,"brand_assets":str(args.brand_assets) if args.brand_assets else None,
               "script":"scripts/codex_artes_15d.py","estado":"borrador","inputs":[{"path":str(x),"sha256":artist.used[x]} for x in sorted(artist.used)],
               "outputs":exports,"publish_authorized":False,"ad_spend_authorized":False}
     write_json(args.output/"manifest.json",manifest)

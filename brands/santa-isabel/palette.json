@@ -1,0 +1,19 @@
+{
+  "version": "2026-11-12-azul-amarillo",
+  "status": "CONFIRMADO_USUARIO",
+  "source": "Nixon solicitó sustituir la paleta verde por azul y amarillo en artes, identidad y sitio web.",
+  "colors": {
+    "navy": "#1B2A4A",
+    "navy_dark": "#111D35",
+    "blue": "#2F5286",
+    "yellow": "#ECD628",
+    "yellow_hover": "#F5E56B",
+    "white": "#FFFFFF",
+    "surface": "#F5F7FB",
+    "muted": "#53627B",
+    "line": "#D9E0EC"
+  },
+  "usage": "Azul dominante; amarillo para acentos, símbolos y CTA; blanco para texto sobre azul. No usar amarillo como texto sobre blanco.",
+  "preserve": ["fotografías del proyecto", "logo oficial RE/MAX", "logo oficial Banco Industrial"],
+  "logo_variants": ["horizontal_claro", "horizontal_oscuro", "vertical_claro", "vertical_oscuro", "icono"]
+}
