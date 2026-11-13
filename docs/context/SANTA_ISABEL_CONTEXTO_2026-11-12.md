@@ -68,3 +68,6 @@ Estado: **borrador, modo HANDOFF. Nada se publica sin aprobación explícita de 
 - Asesor a la **derecha**, nombre pequeño debajo de la foto. RE/MAX y Banco Industrial **grandes a la izquierda** (sin placas, con sombra).
 - Fondo: solo fotos editadas con calles limpias. Para el cierre se usa `SI_FOTO_calles-desde-arriba_v01.jpg`. **No usar `SI_FOTO_calles-internas_v01.jpg`** (Nixon la ve falsa). Lo importante son las calles asfaltadas de la lotificación.
 - Función `cierre_v3` en `brands/nixon-remax/motion_kit/mock_kit.py`.
+
+## 10. Cierre v4 (vigente)
+Teléfono arriba; RE/MAX debajo del teléfono; Banco Industrial del mismo ancho y en el mismo eje, a la par del nombre; asesor a la derecha. Función `cierre_v4` en `motion_kit/mock_kit.py`.
