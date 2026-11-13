@@ -71,3 +71,6 @@ Estado: **borrador, modo HANDOFF. Nada se publica sin aprobación explícita de 
 
 ## 10. Cierre v4 (vigente)
 Teléfono arriba; RE/MAX debajo del teléfono; Banco Industrial del mismo ancho y en el mismo eje, a la par del nombre; asesor a la derecha. Función `cierre_v4` en `motion_kit/mock_kit.py`.
+
+## 11. Cierre v5 (vigente)
+Igual que v4, pero RE/MAX grande (560 px en 9:16) y centrado bajo el teléfono. Función `cierre_v5`.
