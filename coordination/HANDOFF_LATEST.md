@@ -7,6 +7,7 @@
 - **Coordinación:** archivos nuevos `scripts/render_fotos_limpias.py`, `brands/nixon-remax/motion_kit/fotos_limpias_motion.json`, `tests/test_photo_motion.py`; uso en `docs/tools/FOTOS_LIMPIAS_MOTION.md`. Los scripts y cierres que trabaja Claude no se modificaron.
 - **Pendiente:** elección de clips por Nixon e integración en los montajes de Claude. El lote conserva estado `RENDERED_DRAFT` y `publish_authorized=false`.
 - **Siguiente paso:** revisar `index.html`, seleccionar tomas e importar los MP4 del formato elegido al montaje. Medios, previews y QA local permanecen fuera de Git.
+- **Compatibilidad:** el plan de ocho videos incorporado por Claude en `a9089e2` identifica este material como base del video 7. PR #5 compatible con esa actualización. Se deja `manifest.json` con agente, fecha, script, entradas/salidas y hashes. La rama N360-025 fue creada antes de la nueva convención `codex/`; los renders usan el directorio propio `codex_*`.
 
 ---
 

@@ -4,6 +4,7 @@ Inputs remain read-only. A new output directory is required for each version.
 This creates silent editing footage, not a finished property advertisement.
 """
 import argparse
+from datetime import datetime, timedelta, timezone
 import hashlib
 import html
 import json
@@ -159,6 +160,14 @@ def main():
                         "Vertical: recorte de fotos horizontales de 1672x941; no es detalle 4K nativo.",
                         "Clips para montaje: sin voz, música, texto ni aprobación de publicación."]}
     (output / "qa_report.json").write_text(json.dumps(report, ensure_ascii=False, indent=2), encoding="utf-8")
+    manifest = {
+        "agente": "codex", "fecha_hora": datetime.now(timezone(timedelta(hours=-6))).isoformat(),
+        "script": "scripts/render_fotos_limpias.py", "estado": "borrador",
+        "entradas": [{"archivo": x["shot"]["file"], "sha256": x["sha256"]} for x in inputs],
+        "salidas": [{"archivo": r["file"], "sha256": r["sha256"]} for r in records],
+        "notas": report["notes"],
+    }
+    (output / "manifest.json").write_text(json.dumps(manifest, ensure_ascii=False, indent=2), encoding="utf-8")
     (output / "approval_status.json").write_text(json.dumps({"status": "DRAFT", "publish_authorized": False}, indent=2), encoding="utf-8")
     cards = []
     for record in records:
