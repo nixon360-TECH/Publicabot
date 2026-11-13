@@ -1,0 +1,363 @@
+{
+  "campaign": "Santa Isabel · relanzamiento",
+  "task": "N360-026",
+  "start_date": "2026-11-12",
+  "end_date": "2026-11-26",
+  "days": 15,
+  "mode": "HANDOFF",
+  "brand_source": "brands/nixon-remax/motion_kit/kit_nixon_remax.json",
+  "posts": [
+    {
+      "day": 1,
+      "id": "relanzamiento",
+      "layout": "collage",
+      "kicker": "Terrenos desde",
+      "title": [
+        "US$24,500"
+      ],
+      "support": "Desde 286 v² · Con escritura · Agua conectada",
+      "photos": [
+        "calles-desde-arriba",
+        "vista-colinas",
+        "lote-borde"
+      ],
+      "angle": "Precio y vista general",
+      "paid": true,
+      "copy": "Conozca Santa Isabel en Comacarán, San Miguel. Vea distintas perspectivas de la lotificación y dé el siguiente paso: recorrerla personalmente."
+    },
+    {
+      "day": 2,
+      "id": "recorrido",
+      "layout": "collage",
+      "kicker": "Antes de decidir,",
+      "title": [
+        "CONÓZCALO"
+      ],
+      "support": "Santa Isabel desde distintos ángulos",
+      "photos": [
+        "calles-desde-arriba",
+        "cruce-superior",
+        "vista-colinas"
+      ],
+      "angle": "Carrusel de recorrido",
+      "copy": "Una sola foto no cuenta todo. Deslice para ver distintas vistas de Santa Isabel y conocer los datos del proyecto.",
+      "slides": [
+        {
+          "title": [
+            "VISTA GENERAL"
+          ],
+          "kicker": "Así se ve",
+          "support": "Lotificación Santa Isabel · Comacarán",
+          "photos": [
+            "calles-desde-arriba"
+          ]
+        },
+        {
+          "title": [
+            "OTRO ÁNGULO"
+          ],
+          "kicker": "Recorra con la mirada",
+          "support": "Observe las calles y la distribución",
+          "photos": [
+            "lote-borde"
+          ]
+        },
+        {
+          "title": [
+            "VÉALO EN PERSONA"
+          ],
+          "kicker": "El siguiente paso",
+          "support": "Escríbanos para coordinar su recorrido",
+          "photos": [
+            "vista-colinas"
+          ]
+        }
+      ]
+    },
+    {
+      "day": 3,
+      "id": "escritura",
+      "layout": "hero",
+      "kicker": "Terrenos",
+      "title": [
+        "CON ESCRITURA"
+      ],
+      "support": "Conozca Santa Isabel y consulte los detalles",
+      "photos": [
+        "calles-desde-arriba"
+      ],
+      "angle": "Información de la propiedad",
+      "copy": "Si está buscando terreno, conocer su documentación es parte de la decisión. Los terrenos de Santa Isabel cuentan con escritura. Consulte los detalles y agende su visita."
+    },
+    {
+      "day": 4,
+      "id": "agua",
+      "layout": "duo",
+      "kicker": "Santa Isabel cuenta con",
+      "title": [
+        "AGUA CONECTADA"
+      ],
+      "support": "Comacarán, San Miguel",
+      "photos": [
+        "lote-borde",
+        "calles-desde-arriba"
+      ],
+      "angle": "Servicio verificado",
+      "copy": "Agua conectada: uno de los datos que puede conocer de Santa Isabel antes de visitarnos. Le compartimos la información de los terrenos para que evalúe su compra."
+    },
+    {
+      "day": 5,
+      "id": "ubicacion",
+      "layout": "hero",
+      "kicker": "Conozca Santa Isabel en",
+      "title": [
+        "COMACARÁN"
+      ],
+      "support": "San Miguel · El Salvador",
+      "photos": [
+        "vista-colinas"
+      ],
+      "angle": "Ubicación",
+      "copy": "Santa Isabel está en Comacarán, San Miguel. Escríbanos para recibir indicaciones y coordinar una visita al proyecto."
+    },
+    {
+      "day": 6,
+      "id": "visita",
+      "layout": "collage",
+      "kicker": "De la foto",
+      "title": [
+        "A SU VISITA"
+      ],
+      "support": "Conozca el proyecto personalmente",
+      "photos": [
+        "cruce-superior",
+        "calles-desde-arriba",
+        "vista-colinas"
+      ],
+      "angle": "Carrusel para agendar",
+      "copy": "Las fotos son el comienzo. Durante una visita podrá observar el terreno, recorrer el proyecto y consultar la información que necesita para decidir.",
+      "slides": [
+        {
+          "title": [
+            "RECORRA"
+          ],
+          "kicker": "Conozca el lugar",
+          "support": "Observe el terreno y su entorno",
+          "photos": [
+            "cruce-superior"
+          ]
+        },
+        {
+          "title": [
+            "CONSULTE"
+          ],
+          "kicker": "Antes de decidir",
+          "support": "Pregunte por medidas, precio y documentación",
+          "photos": [
+            "calles-desde-arriba"
+          ]
+        }
+      ]
+    },
+    {
+      "day": 7,
+      "id": "financiamiento",
+      "layout": "hero",
+      "kicker": "Consulte por financiamiento con",
+      "title": [
+        "BANCO",
+        "INDUSTRIAL*"
+      ],
+      "support": "Conozca la opción y consulte sus condiciones",
+      "photos": [
+        "vista-colinas"
+      ],
+      "angle": "Financiamiento condicionado",
+      "copy": "Consulte por la opción de financiamiento con Banco Industrial para Santa Isabel. La evaluación y las condiciones corresponden al banco. Le orientamos sobre la información del proyecto."
+    },
+    {
+      "day": 8,
+      "id": "panorama",
+      "layout": "collage",
+      "kicker": "Varias vistas,",
+      "title": [
+        "UN PROYECTO"
+      ],
+      "support": "Conozca Santa Isabel",
+      "photos": [
+        "calles-desde-arriba",
+        "lote-borde",
+        "vista-colinas"
+      ],
+      "angle": "Collage del proyecto",
+      "copy": "Vea Santa Isabel desde diferentes perspectivas: la vista general, sus calles y el entorno. Reúna la información y venga a conocer el proyecto."
+    },
+    {
+      "day": 9,
+      "id": "medidas",
+      "layout": "duo",
+      "kicker": "Terrenos desde",
+      "title": [
+        "286 v²"
+      ],
+      "support": "Desde US$24,500 · Comacarán, San Miguel",
+      "photos": [
+        "lote-borde",
+        "calles-desde-arriba"
+      ],
+      "angle": "Área mínima",
+      "copy": "Terrenos desde 286 varas cuadradas en Santa Isabel. Consulte las opciones disponibles, sus medidas y su precio antes de elegir."
+    },
+    {
+      "day": 10,
+      "id": "asesor",
+      "layout": "advisor",
+      "kicker": "Conozca Santa Isabel con",
+      "title": [
+        "NIXON",
+        "HERNÁNDEZ"
+      ],
+      "support": "Asesor inmobiliario · RE/MAX",
+      "photos": [
+        "calles-desde-arriba"
+      ],
+      "angle": "Acompañamiento",
+      "copy": "Soy Nixon Hernández, asesor inmobiliario RE/MAX. Con gusto le comparto la información de Santa Isabel y coordinamos una visita para que conozca el proyecto."
+    },
+    {
+      "day": 11,
+      "id": "preguntas",
+      "layout": "collage",
+      "kicker": "Antes de elegir,",
+      "title": [
+        "PREGUNTE"
+      ],
+      "support": "Ubicación · Medidas · Documentación",
+      "photos": [
+        "vista-colinas",
+        "calles-desde-arriba",
+        "lote-borde"
+      ],
+      "angle": "Carrusel de preguntas",
+      "copy": "Una visita también es una oportunidad para resolver preguntas. Consulte la ubicación, las medidas, el precio y la documentación del terreno que le interesa.",
+      "slides": [
+        {
+          "title": [
+            "UBICACIÓN"
+          ],
+          "kicker": "Santa Isabel está en",
+          "support": "Comacarán, San Miguel",
+          "photos": [
+            "vista-colinas"
+          ]
+        },
+        {
+          "title": [
+            "DATOS CLAROS"
+          ],
+          "kicker": "Consulte",
+          "support": "Medidas · Precio · Escritura",
+          "photos": [
+            "calles-desde-arriba"
+          ]
+        }
+      ]
+    },
+    {
+      "day": 12,
+      "id": "entorno",
+      "layout": "hero",
+      "kicker": "Conozca también",
+      "title": [
+        "EL ENTORNO"
+      ],
+      "support": "Observe el proyecto desde otra perspectiva",
+      "photos": [
+        "vista-colinas"
+      ],
+      "angle": "Entorno visual",
+      "copy": "Además del terreno, observe el entorno de Santa Isabel. Estas vistas le ayudan a empezar a conocer el proyecto; una visita le permite apreciarlo personalmente."
+    },
+    {
+      "day": 13,
+      "id": "datos",
+      "layout": "duo",
+      "kicker": "Santa Isabel",
+      "title": [
+        "ESCRITURA",
+        "Y AGUA CONECTADA"
+      ],
+      "support": "Terrenos desde US$24,500",
+      "photos": [
+        "calles-desde-arriba",
+        "lote-borde"
+      ],
+      "angle": "Resumen de atributos",
+      "copy": "Dos datos verificados de Santa Isabel: terrenos con escritura y agua conectada. Consulte las medidas y el precio de las opciones disponibles."
+    },
+    {
+      "day": 14,
+      "id": "opciones",
+      "layout": "hero",
+      "kicker": "Dé el siguiente paso:",
+      "title": [
+        "CONSULTE"
+      ],
+      "support": "Financiamiento con Banco Industrial*",
+      "photos": [
+        "lote-borde"
+      ],
+      "angle": "Consulta de financiamiento",
+      "copy": "Si desea conocer la opción de financiamiento para Santa Isabel, escríbanos. Le compartimos la información del proyecto para que consulte las condiciones y la evaluación con Banco Industrial."
+    },
+    {
+      "day": 15,
+      "id": "cierre",
+      "layout": "collage",
+      "kicker": "Agendemos",
+      "title": [
+        "SU VISITA"
+      ],
+      "support": "Santa Isabel · Comacarán, San Miguel",
+      "photos": [
+        "calles-desde-arriba",
+        "vista-colinas",
+        "cruce-superior"
+      ],
+      "angle": "Captación de visitas",
+      "copy": "Ya vio distintas perspectivas de Santa Isabel. Ahora puede conocerlo personalmente: escríbanos para coordinar su visita y consultar la información de los terrenos."
+    }
+  ],
+  "paid_variants": [
+    {
+      "id": "B_medidas",
+      "layout": "collage",
+      "kicker": "Terrenos desde",
+      "title": [
+        "286 v²"
+      ],
+      "support": "Desde US$24,500 · Con escritura · Agua conectada",
+      "photos": [
+        "lote-borde",
+        "calles-desde-arriba",
+        "vista-colinas"
+      ],
+      "angle": "Variante B · área"
+    },
+    {
+      "id": "C_visita",
+      "layout": "collage",
+      "kicker": "Antes de decidir,",
+      "title": [
+        "CONÓZCALO"
+      ],
+      "support": "Terrenos desde US$24,500 · Comacarán, San Miguel",
+      "photos": [
+        "calles-desde-arriba",
+        "vista-colinas",
+        "cruce-superior"
+      ],
+      "angle": "Variante C · visita"
+    }
+  ]
+}

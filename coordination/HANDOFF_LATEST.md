@@ -1,4 +1,16 @@
-# HANDOFF — 2026-11-12 — N360-025
+# HANDOFF — 2026-11-12 — N360-026
+
+- **Confirmado por Nixon:** solo Santa Isabel; ampliar el kit actual; incluir varias fotos en un solo arte. Producir los artes aquí y dejar los videos con Claude. Chat identificado como **NBS publicabot CHATGPT**.
+- **Hecho:** 41 diseños para 15 días (12–26 nov.), con 15 publicaciones y sus historias, siete láminas adicionales para tres carruseles y dos variantes adicionales de pauta en ambos formatos. Collages con fotos limpias; logos oficiales; sin fechas dentro del arte. Copy IG/FB, calendario, galería y ZIP.
+- **Entrega local vigente:** `05_RENDERS_DRAFT/N360-20261112-0001/codex_artes_15d_v02/`, relativa al MEDIA_ROOT de ContentOps. `pauta_inicial/` contiene A precio, B medidas y C visita. `index.html` reúne todos los diseños.
+- **Probado:** render de los 41 diseños, datos contra snapshot, dimensiones 1080×1350 y 1080×1920, límites de zona segura, superposición de textos/logos/retrato y hashes de fuentes. Revisión visual de hojas y muestras a tamaño completo. v02 separa las leyendas de los logos y corrige el retrato en historias.
+- **Editable:** `brands/nixon-remax/codex_campana_15_dias.json` + `scripts/codex_artes_15d.py`. Instrucciones y evidencia del proceso de video de Claude en `docs/tools/CODEX_ARTES_SANTA_ISABEL.md`.
+- **Estado:** borradores para selección de Nixon; publicación y gasto sin activar. La pauta inicial es un paquete de archivos y copy, no una campaña configurada. Revalidar precio y disponibilidad antes de cada publicación.
+- **Siguiente paso:** Nixon revisa el collage A y los demás diseños en la galería. Claude conserva la producción audiovisual. Los archivos activos de Claude no se editaron.
+
+---
+
+## Handoff anterior — 2026-11-12 — N360-025
 
 - **Hecho:** workspace de Codex vinculado al repositorio real como worktree de la rama `feature/N360-025-santa-isabel-videos-codex`, desde `9a4fdd7`. Conexión con GitHub comprobada por conector y Git local. Por elección directa de Nixon, se produjeron clips con movimiento desde las fotos de calles limpias.
 - **Entregado:** 12 clips silenciosos de 6 segundos (seis fotos en 1080x1350 y 1080x1920), previews por formato, galería local, plan editable y QA. Carpeta relativa a MEDIA_ROOT de ContentOps: `05_RENDERS_DRAFT/N360-20261112-0001/codex_fotos_limpias_v02/`. La foto `calles-internas` está excluida. La versión v02 desplaza cuatro encuadres hacia las curvas de las calles; v01 se conserva como historial.
