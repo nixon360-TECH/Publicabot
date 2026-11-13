@@ -74,3 +74,9 @@ Teléfono arriba; RE/MAX debajo del teléfono; Banco Industrial del mismo ancho 
 
 ## 11. Cierre v5 (vigente)
 Igual que v4, pero RE/MAX grande (560 px en 9:16) y centrado bajo el teléfono. Función `cierre_v5`.
+
+## 12. Pistas para continuar
+- Reglas multiagente: `coordination/MULTI_AGENTE_REGLAS.md`. Plan de 8 videos: `docs/plan/PLAN_8_VIDEOS_SANTA_ISABEL.md`.
+- Scripts (referencia, rutas de E:): `motion_kit/video2_fotos.py`, `mezcla_video2.py`, `video_build_v06.py`, `mk_v06.py`.
+- Música del video 2: Universfield «Warm Acoustic Guitar» (Pixabay), registrada en `rights_and_sources.md`.
+- Calle al Jicaral confirmada por Nixon (no «carretera»).
