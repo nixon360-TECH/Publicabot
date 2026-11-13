@@ -4,8 +4,10 @@
 - **Hecho localmente:** encabezado, pie y favicon del sitio restaurados al archivo aprobado `santa-isabel-logo-aprobado.jpg`; interfaz, mapa y catálogo siguen navy/amarillo. Perfil verde original copiado a `05_RENDERS_DRAFT/N360-20261112-0001/codex_identidad_logo_original_v02/` relativa a `E:\NIXON360_CONTENTOPS`.
 - **Campaña:** `codex_artes_15d_azul_amarillo_v03/` no se modificó; el hash de su ZIP se conserva.
 - **Probado:** 20/20 pruebas del sitio, chequeos de sintaxis y revisión visual de escritorio. El navegador cargó el logo aprobado y el favicon original con estado 200.
-- **Estado:** corrección lista para producción. La revisión automática exige autorización explícita ligada a publicar esta versión corregida; el sitio público permanece en la versión 19 hasta recibirla.
-- **Evidencia:** rama `codex/N360-028-santa-isabel-logo-original`; fuente de ChatGPT Sites preparada localmente.
+- **Publicación autorizada y ejecutada:** Nixon aprobó expresamente publicar la corrección. ChatGPT Sites versión 20, commit fuente `c73f4278d1da041fc9d44dd25b8192079b2e8264`, desplegada el 13 de noviembre de 2026.
+- **Verificación pública:** `https://lotificacionsantaisabel.com` cargó correctamente y la revisión visual confirmó el logo verde original en el encabezado, con la interfaz navy/amarilla intacta.
+- **Estado:** `DONE`. No se modificaron ni publicaron los 41 artes y no se activó pauta.
+- **Evidencia:** rama `codex/N360-028-santa-isabel-logo-original`; despliegue `appgdep_6af71ae0bedc819181643a1409411e31`; versión 20.
 
 ---
 
