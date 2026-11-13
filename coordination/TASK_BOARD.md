@@ -2,6 +2,8 @@
 
 | ID | P | Tarea | Owner | Estado |
 |---|---|---|---|---|
+| N360-028 | P0 | Restaurar el logo original verde en sitio y perfil; mantener artes y paleta azul/amarillo | codex / NBS publicabot CHATGPT | DONE (sitio v20 publicado y verificado; logo verde original; interfaz azul/amarilla; 41 artes sin cambios) |
+| N360-027 | P0 | Unificar Santa Isabel en azul y amarillo: identidad, campaña y sitio existente | codex / NBS publicabot CHATGPT | DONE (sitio v19 publicado y verificado; 41 artes e identidad entregados; rama `codex/N360-027-santa-isabel-paleta`) |
 | N360-000 | P0 | Base del repo (contexto, estilo, reglas, skills) | claude | IN_REVIEW (PR) |
 | N360-001 | P0 | Auditoría PC: specs, MEDIA_ROOT, FFmpeg/Whisper/Auto-Editor/DaVinci | claude-code (local) | IN_REVIEW (rama `feature/N360-001-pc-audit`) |
 | N360-003 | P0 | Propiedad piloto verificada | Nixon | TODO |
@@ -14,3 +16,5 @@
 | N360-022 | P1 | Stack de video: FilmCraft identificado e investigado | claude | DONE (aprobado) |
 | N360-023 | P0 | Piloto Santa Isabel con FilmCraft (dron + fotos reales) | claude-code | TODO (tras N360-001) |
 | N360-013 | P2 | Meta Marketing API / Google Ads API (Fase 4) | — | TODO |
+| N360-025 | P0 | Videos con movimiento desde fotos limpias de Santa Isabel | codex | Recursos de montaje entregados; Nixon pidió pieza terminada y luego dejó los videos con Claude. No tratar los clips silenciosos como anuncios finales. |
+| N360-026 | P0 | Relanzamiento Santa Isabel: artes y collages para 15 días, con paquete inicial de pauta | codex / NBS publicabot CHATGPT | IN_REVIEW (41 diseños; 15 días con historias, 3 carruseles y variantes de pauta; rama `codex/N360-026-santa-isabel-artes-15-dias`) |

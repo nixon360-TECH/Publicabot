@@ -5,3 +5,8 @@ public_price: "desde US$24,500 por lote, sujeto a disponibilidad"
 blocked_until_revalidated: [monto_reserva, servicios_instalados, contacto_sitio, cuotas_tasas]
 internal_never_public: true   # ver master §11.2
 site: https://lotificacionsantaisabel.com  # no modificar sin petición expresa
+palette: brands/santa-isabel/palette.json
+palette_status: CONFIRMADO_USUARIO_2026-11-12
+palette_primary: "#1B2A4A"
+palette_accent: "#ECD628"
+palette_neutral: "#FFFFFF"

@@ -1,0 +1,15 @@
+{
+  "version": "v02",
+  "duration_seconds": 6,
+  "fps": 25,
+  "formats": {"4x5": [1080, 1350], "9x16": [1080, 1920]},
+  "excluded": ["SI_FOTO_calles-internas_v01.jpg"],
+  "shots": [
+    {"id": "01_calles-desde-arriba", "file": "SI_FOTO_calles-desde-arriba_v01.jpg", "motion": "push_in", "crop_anchor": [0.54, 0.5]},
+    {"id": "02_calles-entre-lotes", "file": "SI_FOTO_calles-entre-lotes_v01.jpg", "motion": "pan_right", "crop_anchor": [1.0, 0.5]},
+    {"id": "03_camino-lateral", "file": "SI_FOTO_camino-lateral_v01.jpg", "motion": "pull_out", "crop_anchor": [0.52, 0.5]},
+    {"id": "04_cruce-superior", "file": "SI_FOTO_cruce-superior_v01.jpg", "motion": "pan_left", "crop_anchor": [0.95, 0.5]},
+    {"id": "05_lote-borde", "file": "SI_FOTO_lote-borde_v01.jpg", "motion": "reveal_up", "crop_anchor": [1.0, 0.5]},
+    {"id": "06_vista-colinas", "file": "SI_FOTO_vista-colinas_v01.jpg", "motion": "push_in", "crop_anchor": [1.0, 0.5]}
+  ]
+}
