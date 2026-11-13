@@ -80,3 +80,9 @@ Igual que v4, pero RE/MAX grande (560 px en 9:16) y centrado bajo el teléfono. 
 - Scripts (referencia, rutas de E:): `motion_kit/video2_fotos.py`, `mezcla_video2.py`, `video_build_v06.py`, `mk_v06.py`.
 - Música del video 2: Universfield «Warm Acoustic Guitar» (Pixabay), registrada en `rights_and_sources.md`.
 - Calle al Jicaral confirmada por Nixon (no «carretera»).
+
+## 13. Voces y sets de videos (2026-11-13)
+- Ganchos aprobados por Nixon: 1, 2, 4 (texto «¿Y al comprar me dan mi escritura?»), 7 y 8. Guiones: 1 «Directo» y 2 «Tres preguntas».
+- Segmento nuevo: «hermanos lejanos» (video H). No afirmar compra a distancia ni trámites hasta que Nixon lo confirme.
+- Para grabar la voz: `COMO_GRABAR_LA_VOZ.md` y `teleprompter_venta.html` (en `motion_kit/`); mezcla con `mezclar_voces.py`.
+- «listos para construir»: lo dijo Nixon; no está en el snapshot. Revalidar antes de pauta.
