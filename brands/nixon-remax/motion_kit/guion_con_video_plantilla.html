@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Grabar la voz viendo el video</title>
+<style>
+  :root { --bg:#0e1511; --fg:#f4f1e8; --dim:#7d887f; --acc:#ecd628; --card:#17201a; --line:#2a352d; }
+  * { box-sizing: border-box; }
+  body { margin:0; background:var(--bg); color:var(--fg); font-family: Georgia, "Times New Roman", serif; }
+  header { padding:10px 14px; display:flex; gap:8px; flex-wrap:wrap; align-items:center; background:var(--card); border-bottom:1px solid var(--line); position:sticky; top:0; z-index:5; }
+  select, button, label { font:600 16px system-ui, sans-serif; }
+  select, button { padding:10px 14px; border-radius:10px; border:1px solid var(--line); background:#0f1712; color:var(--fg); }
+  button.go { background:var(--acc); color:#16200f; border-color:var(--acc); }
+  #t { margin-left:auto; font:700 18px ui-monospace, Consolas, monospace; color:var(--acc); }
+  .wrap { display:flex; gap:18px; padding:16px; max-width:1100px; margin:0 auto; flex-wrap:wrap; justify-content:center; }
+  .vid { flex:0 0 auto; width:min(320px, 80vw); }
+  video { width:100%; border-radius:14px; background:#000; display:block; }
+  .txt { flex:1 1 340px; min-width:300px; }
+  #cur { font-size:clamp(30px, 5vw, 52px); line-height:1.22; font-weight:700; min-height:190px; }
+  #next { color:var(--dim); font-size:22px; margin:6px 0 18px; min-height:60px; }
+  ol { padding-left:0; list-style:none; margin:0; }
+  li { padding:10px 12px; border-radius:10px; margin:6px 0; font-size:20px; line-height:1.3; color:var(--dim); }
+  li b { font:700 13px ui-monospace, Consolas, monospace; margin-right:8px; color:var(--dim); }
+  li.on { background:var(--card); color:var(--fg); outline:2px solid var(--acc); }
+  li.on b { color:var(--acc); }
+  .hint { color:var(--dim); font:14px system-ui, sans-serif; margin-top:14px; line-height:1.4; }
+  #err { color:#ff9a8a; font:600 15px system-ui, sans-serif; margin:10px 0; display:none; }
+</style>
+</head>
+<body>
+<header>
+  <select id="sel"></select>
+  <button class="go" id="play">▶ Ver y grabar</button>
+  <button id="rest">↺ Reiniciar</button>
+  <label><input type="checkbox" id="mus"> con música (use audífonos)</label>
+  <div id="t">0.0 s</div>
+</header>
+<div class="wrap">
+  <div class="vid"><video id="v" playsinline muted preload="auto"></video><div id="err"></div></div>
+  <div class="txt">
+    <div id="cur">Elija el video y pulse «Ver y grabar».</div>
+    <div id="next"></div>
+    <ol id="lines"></ol>
+    <div class="hint">1) Empiece a grabar el audio en su teléfono. 2) Pulse «Ver y grabar». 3) Vaya leyendo la frase marcada mientras ve el video. 4) Haga una pausa corta entre frases. Si se equivoca, pulse «Reiniciar» y repita la toma completa.</div>
+  </div>
+</div>
+<script>
+/*DATOS*/
+const $ = id => document.getElementById(id);
+const sel = $('sel'), v = $('v');
+Object.keys(DATOS).forEach(k => { const o = document.createElement('option'); o.value = k; o.textContent = k + ' · ' + DATOS[k].titulo; sel.appendChild(o); });
+const L = () => DATOS[sel.value].lineas;
+function cargar() {
+  v.pause(); v.muted = !$('mus').checked;
+  v.src = '../../06_REVIEW_PREVIEWS/N360-20261112-0001/preview_low_venta_' + sel.value + '_v03.mp4';
+  v.load(); $('err').style.display = 'none';
+  $('lines').innerHTML = L().map(([t, s], i) => `<li id="l${i}"><b>${t.toFixed(1)} s</b>${s}</li>`).join('');
+  $('cur').textContent = 'Elija el video y pulse «Ver y grabar».'; $('next').textContent = ''; $('t').textContent = '0.0 s';
+}
+v.onerror = () => { $('err').textContent = 'Este video todavía no está listo para verse aquí. Use el teleprompter normal.'; $('err').style.display = 'block'; };
+sel.onchange = cargar;
+$('mus').onchange = () => { v.muted = !$('mus').checked; };
+$('play').onclick = () => { v.currentTime = 0; v.play(); };
+$('rest').onclick = () => { v.pause(); v.currentTime = 0; cargar(); };
+v.ontimeupdate = () => {
+  const t = v.currentTime, l = L(); let i = -1;
+  l.forEach(([ts], k) => { if (t >= ts - 0.05) i = k; });
+  $('t').textContent = t.toFixed(1) + ' s';
+  $('cur').textContent = i >= 0 ? l[i][1] : '…prepárese…';
+  $('next').textContent = i + 1 < l.length ? 'Sigue: ' + l[i+1][1] : '';
+  l.forEach((_, k) => { const e = $('l' + k); if (e) e.className = (k === i) ? 'on' : ''; });
+};
+v.onended = () => { $('cur').textContent = 'Listo. Detenga la grabación y guárdela como vo_' + sel.value; };
+cargar();
+</script>
+</body>
+</html>

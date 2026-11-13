@@ -1,0 +1,38 @@
+{
+  "content_id": "N360-20261112-0001",
+  "project": "Lotificación Santa Isabel",
+  "location": "Comacarán, San Miguel, El Salvador",
+  "status": "VERIFIED_BY_USER_2026-11-12",
+  "source": "CONFIRMADO_USUARIO en chat el 2026-11-12 (no verificado contra documento externo)",
+  "public_facts": {
+    "price_from_usd": 24500,
+    "price_text": "Terrenos desde US$24,500",
+    "water_connected": true,
+    "with_deed": true,
+    "min_lot_size_varas2": 286,
+    "min_lot_size_note": "CONFIRMADO_USUARIO 2026-11-12: son varas cuadradas (v²), no m². Equivale a ~200 m²; mostrar solo v² salvo que Nixon pida m²",
+    "financing_bank": "Banco Industrial (nombrarlo permitido, con asterisco)",
+    "terrain_state": "CONFIRMADO_USUARIO 2026-11-12: sigue igual que en las tomas aéreas"
+  },
+  "disclaimers_required": [
+    "Sujeto a disponibilidad.",
+    "*Financiamiento con Banco Industrial sujeto a evaluación del banco."
+  ],
+  "style_rules": [
+    "No poner fechas en pantalla (ni de precios ni de tomas)."
+  ],
+  "blocked_do_not_state": [
+    "monto de reserva (master §11.3)",
+    "electricidad/conexión eléctrica (master §11.3)",
+    "datos internos de negociación y comisiones (master §11.2)",
+    "tasas o cuotas de crédito"
+  ],
+  "removed_from_previous_version": [
+    "US$24,000 (error)",
+    "Desde 200 m² (la unidad correcta es 286 v²)",
+    "Precios de lista al 22 de octubre (sin fechas en pantalla)",
+    "Tomas aéreas del 4 de julio de 2026 (sin fechas en pantalla)"
+  ],
+  "contact": "+503 7956 4399",
+  "pending_user_confirmation": []
+}

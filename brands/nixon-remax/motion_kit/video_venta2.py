@@ -9,6 +9,7 @@ from PIL import Image, ImageDraw
 
 BUILD = os.path.dirname(os.path.abspath(__file__))
 src = open(os.path.join(BUILD, 'video_build_v05.py'), encoding='utf-8').read()
+src = src.replace('(1 - 0.30 * band)', '(1 - 0.16 * band)')
 exec(compile(src[:src.index('def C(k')], 'v05_core', 'exec'))      # fuentes, Block, Counter, draw_style, logos, W, H, FF, PROX...
 sys.path.insert(0, r'E:\NIXON360_CONTENTOPS\04_PROJECTS_EDITABLE\_KIT')
 import mock_kit as MK
@@ -97,8 +98,8 @@ def logos(fr, t, remax=True, si=False):
 
 
 # ---- v01b: letras azules mas claras y con menos sombra (pedido de Nixon: no se veian a la izquierda)
-PAL_DARK = [np.array(c, np.float32) / 255 for c in ((28, 92, 150), (38, 135, 188), (70, 195, 215))]
-SHADOW['protag'] = 0.30
+PAL_DARK = [np.array(c, np.float32) / 255 for c in ((52, 132, 198), (66, 172, 226), (104, 214, 236))]
+SHADOW['protag'] = 0.20
 
 # ---------------- textos (estilo en capas del kit) ----------------
 HOOKS = {
@@ -116,6 +117,17 @@ HOOKS['hookG4'] = Block([('¿Y al comprar', 'conn', 90, 0.2), ('ME DAN MI', 'pro
 HOOKS['hookH'] = Block([('Hermano lejano,', 'conn', 90, 0.2), ('SU TERRENO', 'protag', 175, 0.8), ('en Comacarán, El Salvador', 'accent', 80, 1.7)],
                        [[0], [1], [2]], y=960, t_end=S1_END - 0.05)
 HOOK_CLIP = {'hookD': 'sm_0554', 'hookE': 'sm_0557', 'hookF': 'sm_0555', 'hookG1': 'sm_0560', 'hookG4': 'sm_0570', 'hookH': 'sm_0576'}
+HOOKS['hookF'] = Block([('Escritura', 'protag', 150, 0.25), ('Agua conectada', 'protag', 125, 0.85), ('Calles asfaltadas', 'protag', 115, 1.45),
+                        ('en Comacarán, San Miguel', 'accent', 76, 2.2)], [[0], [1], [2], [3]], y=800, t_end=S1_END - 0.05)
+HOOKS['hookH1'] = Block([('Hermano lejano,', 'conn', 88, 0.2), ('TU TERRENO', 'protag', 175, 0.8), ('en San Miguel te espera', 'accent', 76, 1.7)],
+                        [[0], [1], [2]], y=960, t_end=S1_END - 0.05)
+HOOKS['hookH2'] = Block([('¿Vive fuera del país?', 'conn', 82, 0.2), ('TU TERRENO', 'protag', 170, 0.8), ('en Comacarán, San Miguel, ¡te espera!', 'accent', 66, 1.7)],
+                        [[0], [1], [2]], y=960, t_end=S1_END - 0.05)
+HOOKS['hookH3'] = [Block([('Hermano lejano,', 'conn', 80, 0.2), ('¿qué haces con', 'conn', 80, 0.5), ('$24,500', 'protag', 190, 0.9), ('en El Salvador?', 'accent', 84, 1.4)],
+                         [[0, 1], [2], [3]], y=900, t_end=2.15),
+                   Block([('¡Compras', 'conn', 90, 2.25), ('TU PRIMER LOTE', 'protag', 150, 2.5), ('para tu casa!', 'accent', 90, 3.1)],
+                         [[0], [1], [2]], y=920, t_end=S1_END - 0.05)]
+HOOK_CLIP.update({'hookF': 'sm_0578', 'hookH1': 'sm_0576', 'hookH2': 'sm_0574', 'hookH3': 'sm_0575'})
 # S2: primero el nombre (sin logo arriba, para no repetir); despues SOLO los pines de ubicacion
 B2a = Block([('Lotificación', 'conn', 80, T1 + 0.2), ('SANTA ISABEL', 'protag', 170, T1 + 0.6), ('Comacarán, San Miguel', 'accent', 84, T1 + 1.4)],
             [[0], [1], [2]], y=1090, t_end=T1 + 3.2)
@@ -230,13 +242,14 @@ def render_up(up, size, cx, cy, z):
 def gen_hook(key):
     n = int(S1_END * FPS)
     gen = proxy_frames(HOOK_CLIP[key], 0.0, n)
-    b = HOOKS[key]
+    bs = HOOKS[key] if isinstance(HOOKS[key], list) else [HOOKS[key]]
     for i in range(n):
         t = i / FPS
         z = 1.0 + 0.07 * (t / S1_END) + 0.075 * max(0.0, 1 - t / 0.16) ** 2
         fr = zoom_f(next(gen), z)
-        if b.active(t):
-            b.apply(fr, t)
+        for b in bs:
+            if b.active(t):
+                b.apply(fr, t)
         logos(fr, t)
         yield fr
 
@@ -308,7 +321,7 @@ def gen_body():
 
 
 PINC = {}
-gen = {'hookD': lambda: gen_hook('hookD'), 'hookE': lambda: gen_hook('hookE'), 'hookF': lambda: gen_hook('hookF'), 'hookG1': lambda: gen_hook('hookG1'), 'hookG4': lambda: gen_hook('hookG4'), 'hookH': lambda: gen_hook('hookH'), 'body': gen_body, 'body2b': gen_body}[PART]()
+gen = {'hookD': lambda: gen_hook('hookD'), 'hookE': lambda: gen_hook('hookE'), 'hookF': lambda: gen_hook('hookF'), 'hookG1': lambda: gen_hook('hookG1'), 'hookG4': lambda: gen_hook('hookG4'), 'hookH': lambda: gen_hook('hookH'), 'hookH1': lambda: gen_hook('hookH1'), 'hookH2': lambda: gen_hook('hookH2'), 'hookH3': lambda: gen_hook('hookH3'), 'body': gen_body, 'body2b': gen_body}[PART]()
 OUT = PARTS + rf'\v2_{PART}_mudo.mp4'
 enc = subprocess.Popen([FF, '-y', '-v', 'error', '-f', 'rawvideo', '-pix_fmt', 'rgb24', '-s', f'{W}x{H}', '-r', str(FPS), '-i', '-',
                         '-c:v', 'libx264', '-crf', '17', '-preset', 'medium', '-pix_fmt', 'yuv420p', '-g', '25',

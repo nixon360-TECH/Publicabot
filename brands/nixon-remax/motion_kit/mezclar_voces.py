@@ -1,11 +1,10 @@
 # -*- coding: utf-8 -*-
-"""Mezcla FINAL de los videos: une gancho + cuerpo, pone una musica distinta en cada uno y, si existe la voz de Nixon,
-la alinea (quita el silencio inicial y la coloca a 0.2 s), baja la musica mientras habla y normaliza a -14 LUFS.
-Sin voz tambien funciona (deja la musica sola = vista previa).
-
-Voces: carpeta E:\\NIXON360_CONTENTOPS\\00_INBOX\\N360-20261112-0001\\voces\\ con archivos vo_A, vo_B, vo_G1, vo_G2, vo_G4, vo_H
-(cualquier formato: .m4a .mp3 .wav .aac .ogg). Uso:  python mezclar_voces.py [IDs...]   ej.  python mezclar_voces.py A G2"""
+"""Mezcla FINAL de los 12 videos: une gancho + cuerpo, pone una musica distinta en cada uno y, si existe la voz de Nixon,
+la alinea (alinear_voz.py), baja la musica mientras habla y normaliza a -14 LUFS. Sin voz = musica sola (vista previa).
+Voces: E:\\NIXON360_CONTENTOPS\\00_INBOX\\N360-20261112-0001\\voces\\vo_<ID>.(m4a|mp3|wav|aac|ogg)
+Uso: python mezclar_voces.py [IDs...]   ej.: python mezclar_voces.py A G2   (sin IDs = todos los que tengan video)"""
 import os, sys, glob, subprocess
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 FF = r'C:\Users\Usuario\AppData\Local\Microsoft\WinGet\Links\ffmpeg.exe'
 ROOT = r'E:\NIXON360_CONTENTOPS'
 PID = 'N360-20261112-0001'
@@ -17,20 +16,32 @@ PREV = ROOT + rf'\06_REVIEW_PREVIEWS\{PID}'
 DUR = 30.0
 SUF = 'v03'
 
-# id -> (parte gancho, parte cuerpo, musica, segundo de inicio)
+DOC = 'atlasaudio-upbeat-documentary-621616.mp3'
+INSP = 'cinematic-soul-upbeat-and-inspiring-corporate-music-inspire-motion-511448.mp3'
+KORN = 'kornevmusic-upbeat-happy-corporate-487426.mp3'
+DANA = 'danamusic-upbeat-acoustic-uplifting-238981.mp3'
+MONT = 'the_mountain-upbeat-acoustic-593084.mp3'
+HAPPY = 'grand_project-simple-happy-life-353819.mp3'
+# id -> (gancho, cuerpo, musica, segundo de inicio de la musica)
 V = {
-    'A':  ('hookA.mp4', 'body.mp4', 'atlasaudio-upbeat-documentary-621616.mp3', 0.0),
-    'B':  ('hookB.mp4', 'body.mp4', 'cinematic-soul-upbeat-and-inspiring-corporate-music-inspire-motion-511448.mp3', 12.0),
-    'G1': ('v2_hookG1.mp4', 'v2_body2b.mp4', 'kornevmusic-upbeat-happy-corporate-487426.mp3', 0.0),
-    'G2': ('v3_hookG2.mp4', 'v3_body.mp4', 'danamusic-upbeat-acoustic-uplifting-238981.mp3', 0.0),
-    'G4': ('v2_hookG4.mp4', 'v2_body2b.mp4', 'the_mountain-upbeat-acoustic-593084.mp3', 0.0),
-    'H':  ('v2_hookH.mp4', 'v2_body2b.mp4', 'grand_project-simple-happy-life-353819.mp3', 0.0),
+    'A':  ('hookA', 'body', DOC, 0.0),
+    'B':  ('hookB', 'body', INSP, 12.0),
+    'C':  ('hookC', 'body', KORN, 0.0),
+    'D':  ('v2_hookD', 'v2_body2b', DANA, 0.0),
+    'E':  ('v2_hookE', 'v2_body2b', MONT, 0.0),
+    'F':  ('v2_hookF', 'v2_body2b', HAPPY, 0.0),
+    'G1': ('v2_hookG1', 'v2_body2b', INSP, 40.0),
+    'G2': ('v3_hookG2', 'v3_body', DOC, 30.0),
+    'G4': ('v2_hookG4', 'v2_body2b', KORN, 30.0),
+    'H1': ('v2_hookH1', 'v2_body2b', DANA, 40.0),
+    'H2': ('v2_hookH2', 'v2_body2b', MONT, 25.0),
+    'H3': ('v2_hookH3', 'v2_body2b', HAPPY, 30.0),
 }
 ids = [a.upper() for a in sys.argv[1:]] or list(V)
 
 
 def parte(n):
-    return PARTS + '\\' + n.replace('.mp4', '_mudo.mp4')
+    return PARTS + '\\' + n + '_mudo.mp4'
 
 
 for i in ids:
@@ -43,12 +54,20 @@ for i in ids:
     subprocess.run([FF, '-y', '-v', 'error', '-f', 'concat', '-safe', '0', '-i', lst, '-c', 'copy', joined], check=True)
     m = (f'[1:a]atrim={off}:{off + DUR},asetpts=PTS-STARTPTS,afade=t=in:st=0:d=1.0,'
          f'afade=t=out:st={DUR - 2.0}:d=2.0,volume=0.55[m]')
-    voz = glob.glob(VOCES + rf'\vo_{i}.*')
+    crudas = [f for f in glob.glob(VOCES + rf'\vo_{i}.*') if '_alineada' not in f]
+    voz = None
+    if crudas:
+        try:
+            import alinear_voz
+            voz = alinear_voz.alinear(i, crudas[0])
+        except SystemExit as e:
+            print(e)
+        except Exception as e:
+            print('No se pudo alinear', i, '->', e)
     cmd = [FF, '-y', '-v', 'error', '-i', joined, '-i', INB + '\\' + mus]
     if voz:
-        cmd += ['-i', voz[0]]
-        fc = (m + ';[2:a]aresample=48000,silenceremove=start_periods=1:start_threshold=-38dB:start_silence=0.1,'
-              'adelay=200|200,highpass=f=80,acompressor=threshold=-18dB:ratio=3:attack=5:release=120,asplit=2[vv][sc];'
+        cmd += ['-i', voz]
+        fc = (m + ';[2:a]aresample=48000,highpass=f=80,acompressor=threshold=-18dB:ratio=3:attack=5:release=120,asplit=2[vv][sc];'
               '[m][sc]sidechaincompress=threshold=0.03:ratio=8:attack=20:release=400[md];'
               '[md][vv]amix=inputs=2:normalize=0:duration=first[mx];[mx]loudnorm=I=-14:TP=-1.5:LRA=9[a]')
     else:

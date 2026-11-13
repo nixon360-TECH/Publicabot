@@ -9,6 +9,7 @@ from PIL import Image, ImageDraw
 
 BUILD = os.path.dirname(os.path.abspath(__file__))
 src = open(os.path.join(BUILD, 'video_build_v05.py'), encoding='utf-8').read()
+src = src.replace('(1 - 0.30 * band)', '(1 - 0.16 * band)')
 exec(compile(src[:src.index('def C(k')], 'v05_core', 'exec'))      # fuentes, Block, Counter, draw_style, logos, W, H, FF, PROX...
 sys.path.insert(0, r'E:\NIXON360_CONTENTOPS\04_PROJECTS_EDITABLE\_KIT')
 import mock_kit as MK
@@ -97,8 +98,8 @@ def logos(fr, t, remax=True, si=False):
 
 
 # ---- v01b: letras azules mas claras y con menos sombra (pedido de Nixon: no se veian a la izquierda)
-PAL_DARK = [np.array(c, np.float32) / 255 for c in ((28, 92, 150), (38, 135, 188), (70, 195, 215))]
-SHADOW['protag'] = 0.30
+PAL_DARK = [np.array(c, np.float32) / 255 for c in ((52, 132, 198), (66, 172, 226), (104, 214, 236))]
+SHADOW['protag'] = 0.20
 
 # ---------------- textos (estilo en capas del kit) ----------------
 HOOKS = {
@@ -114,6 +115,15 @@ HOOKS['hookG1'] = Block([('¿Cuánto cuesta un terreno', 'conn', 70, 0.2), ('EN 
 HOOKS['hookG4'] = Block([('¿Y al comprar', 'conn', 90, 0.2), ('ME DAN MI', 'protag', 170, 0.7), ('ESCRITURA?', 'protag', 190, 1.3)],
                         [[0], [1], [2]], y=940, t_end=S1_END - 0.05)
 HOOK_CLIP = {'hookD': 'sm_0554', 'hookE': 'sm_0557', 'hookF': 'sm_0555', 'hookG1': 'sm_0560', 'hookG4': 'sm_0570'}
+HOOKS['hookF'] = Block([('Escritura', 'protag', 150, 0.25), ('Agua conectada', 'protag', 125, 0.85), ('Calles asfaltadas', 'protag', 115, 1.45),
+                        ('en Comacarán, San Miguel', 'accent', 76, 2.2)], [[0], [1], [2], [3]], y=800, t_end=S1_END - 0.05)
+HOOKS['hookH'] = None
+HOOKS['hookH1'] = HOOKS['hookH']
+HOOKS['hookH2'] = Block([('¿Vive fuera del país?', 'conn', 82, 0.2), ('SU TERRENO', 'protag', 170, 0.8), ('en Comacarán, San Miguel', 'accent', 80, 1.7)],
+                        [[0], [1], [2]], y=960, t_end=S1_END - 0.05)
+HOOKS['hookH3'] = Block([('Hermano lejano:', 'conn', 90, 0.2), ('US$24,500', 'protag', 190, 0.8), ('su terreno en El Salvador', 'accent', 78, 1.8)],
+                        [[0], [1], [2]], y=960, t_end=S1_END - 0.05)
+HOOK_CLIP.update({'hookF': 'sm_0578', 'hookH1': 'sm_0576', 'hookH2': 'sm_0574', 'hookH3': 'sm_0575'})
 # S2: primero el nombre (sin logo arriba, para no repetir); despues SOLO los pines de ubicacion
 B2a = Block([('Lotificación', 'conn', 80, T1 + 0.2), ('SANTA ISABEL', 'protag', 170, T1 + 0.6), ('Comacarán, San Miguel', 'accent', 84, T1 + 1.4)],
             [[0], [1], [2]], y=1090, t_end=T1 + 3.2)

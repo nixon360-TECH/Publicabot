@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Teleprompter Santa Isabel</title>
+<style>
+  :root { --bg:#0e1511; --fg:#f4f1e8; --dim:#7d887f; --acc:#ecd628; --card:#17201a; --line:#2a352d; }
+  * { box-sizing: border-box; }
+  body { margin:0; background:var(--bg); color:var(--fg); font-family: Georgia, "Times New Roman", serif; min-height:100vh; }
+  header { padding:12px 14px; display:flex; gap:8px; flex-wrap:wrap; align-items:center; border-bottom:1px solid var(--line); background:var(--card); position:sticky; top:0; z-index:5; }
+  select, button { font:600 16px system-ui, sans-serif; padding:10px 14px; border-radius:10px; border:1px solid var(--line); background:#0f1712; color:var(--fg); }
+  button.go { background:var(--acc); color:#16200f; border-color:var(--acc); }
+  #time { font:700 18px ui-monospace, Consolas, monospace; margin-left:auto; color:var(--acc); }
+  #bar { height:6px; background:var(--line); } #bar i { display:block; height:100%; width:0; background:var(--acc); }
+  main { padding:18px 16px 120px; max-width:900px; margin:0 auto; text-align:center; }
+  .modo { display:flex; gap:8px; justify-content:center; margin-bottom:10px; }
+  .modo button.on { background:var(--acc); color:#16200f; border-color:var(--acc); }
+  #count { font:800 110px system-ui, sans-serif; color:var(--acc); min-height:120px; }
+  .prev, .next { color:var(--dim); font-size:21px; margin:8px 0; line-height:1.3; min-height:28px; }
+  .cur { font-size:clamp(32px, 7vw, 62px); line-height:1.2; margin:18px 0; font-weight:700; min-height:150px; }
+  .hint { color:var(--dim); font:14px system-ui, sans-serif; margin-top:22px; }
+  #lectura { display:none; text-align:left; }
+  #lectura p { font-size:clamp(28px, 5.5vw, 46px); line-height:1.35; margin:0 0 .7em; }
+  #lectura small { display:block; color:var(--dim); font:600 14px ui-monospace, Consolas, monospace; }
+  details { margin-top:26px; text-align:left; background:var(--card); border:1px solid var(--line); border-radius:12px; padding:12px 16px; }
+  summary { cursor:pointer; font:600 16px system-ui, sans-serif; }
+  ol { padding-left:20px; } li { margin:9px 0; line-height:1.35; font-size:19px; } li b { color:var(--acc); font:700 14px ui-monospace, Consolas, monospace; margin-right:8px; }
+</style>
+</head>
+<body>
+<header>
+  <select id="sel"></select>
+  <button class="go" id="start">Iniciar</button>
+  <button id="stop">Parar</button>
+  <div id="time">0.0 / 30.0 s</div>
+</header>
+<div id="bar"><i id="fill"></i></div>
+<main>
+  <div class="modo">
+    <button id="m1" class="on">Modo guiado (con tiempos)</button>
+    <button id="m2">Modo lectura (texto completo)</button>
+  </div>
+  <div id="guiado">
+    <div id="count"></div>
+    <div class="prev" id="prev"></div>
+    <div class="cur" id="cur">Elija el video y pulse «Iniciar».</div>
+    <div class="next" id="next"></div>
+    <div class="hint">1) Empiece a grabar el audio en el teléfono. 2) Pulse «Iniciar». 3) Lea cada frase cuando aparezca y haga una pausa de un segundo entre frase y frase. Si se equivoca, pare y repita la toma completa.</div>
+  </div>
+  <div id="lectura"></div>
+  <details><summary>Guion completo de este video</summary><ol id="all"></ol></details>
+</main>
+<script>
+/*DATOS*/
+const $ = id => document.getElementById(id);
+const sel = $('sel');
+Object.keys(DATOS).forEach(k => { const o = document.createElement('option'); o.value = k; o.textContent = k + ' · ' + DATOS[k].titulo; sel.appendChild(o); });
+let timer = null, t0 = 0, cuenta = null;
+const fmt = x => x.toFixed(1);
+function L() { return DATOS[sel.value].lineas; }
+function lista() {
+  $('all').innerHTML = L().map(([t, s]) => `<li><b>${fmt(t)} s</b>${s}</li>`).join('');
+  $('lectura').innerHTML = L().map(([t, s]) => `<p><small>${fmt(t)} s</small>${s}</p>`).join('');
+  $('cur').textContent = 'Elija el video y pulse «Iniciar».'; $('prev').textContent = ''; $('next').textContent = '';
+}
+function parar() { clearInterval(timer); clearInterval(cuenta); timer = cuenta = null; $('count').textContent = ''; $('fill').style.width = '0'; $('time').textContent = '0.0 / 30.0 s'; }
+function correr() {
+  const l = L(); t0 = performance.now();
+  timer = setInterval(() => {
+    const t = (performance.now() - t0) / 1000;
+    let i = -1; l.forEach(([ts], k) => { if (t >= ts - 0.05) i = k; });
+    $('cur').textContent = i >= 0 ? l[i][1] : '…prepárese…';
+    $('prev').textContent = i > 0 ? l[i-1][1] : '';
+    $('next').textContent = i + 1 < l.length ? 'Sigue: ' + l[i+1][1] : '';
+    $('time').textContent = fmt(Math.min(t, 30)) + ' / 30.0 s';
+    $('fill').style.width = Math.min(100, t / 30 * 100) + '%';
+    if (t >= 30.5) { parar(); $('cur').textContent = 'Listo. Guarde la grabación como vo_' + sel.value; }
+  }, 50);
+}
+sel.onchange = () => { parar(); lista(); };
+$('start').onclick = () => {
+  parar(); let n = 3; $('count').textContent = n; $('cur').textContent = 'Prepárese…';
+  cuenta = setInterval(() => { n--; if (n > 0) $('count').textContent = n; else { clearInterval(cuenta); $('count').textContent = ''; correr(); } }, 1000);
+};
+$('stop').onclick = () => { parar(); lista(); };
+$('m1').onclick = () => { $('guiado').style.display = ''; $('lectura').style.display = 'none'; $('m1').className = 'on'; $('m2').className = ''; };
+$('m2').onclick = () => { parar(); $('guiado').style.display = 'none'; $('lectura').style.display = 'block'; $('m2').className = 'on'; $('m1').className = ''; };
+lista();
+</script>
+</body>
+</html>

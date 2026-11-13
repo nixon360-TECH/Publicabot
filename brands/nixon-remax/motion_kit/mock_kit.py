@@ -312,7 +312,7 @@ def cierre_v4(bg_path, foto, out, size, guias=True):
 
 
 
-def cierre_v5(bg_path, foto, out, size, guias=True):
+def cierre_v5(bg_path, foto, out, size, guias=True, fscale=1.0, falpha=1.0):
     """v5 (RE/MAX grande y centrado; BI a la par del nombre): telefono arriba; RE/MAX debajo del telefono; Banco Industrial (mismo ancho) a la par del nombre.
     RE/MAX y BI comparten eje vertical y ancho para dar armonia. Asesor a la derecha."""
     W, H = size
@@ -349,10 +349,10 @@ def cierre_v5(bg_path, foto, out, size, guias=True):
         yl += int(25 * k)
     ph = Image.open(foto).convert("RGBA")
     crop = ph.crop((0, 0, ph.width, int(ph.height * 0.64)))
-    phh = int(330 * k)
+    phh = max(2, int(330 * k * fscale))
     crop = crop.resize((int(crop.width * phh / crop.height), phh), Image.LANCZOS)
     m = np.array(crop.split()[3], np.float32); fade = np.clip((np.arange(phh)[:, None] - (phh - 50)) / 50.0, 0, 1)
-    crop.putalpha(Image.fromarray((m * (1 - fade)).astype(np.uint8)))
+    crop.putalpha(Image.fromarray((m * (1 - fade) * falpha).astype(np.uint8)))
     px = W - gz["derecha"] - crop.width + 20; py = yb - int(36 * k) - phh + 30
     lay = Image.new("RGBA", size, (0, 0, 0, 0)); lay.paste(crop, (px, py), crop)
     img = Image.alpha_composite(img, shadow_layer(lay, 18, 0, 0.6, (0, 8)))
@@ -361,6 +361,8 @@ def cierre_v5(bg_path, foto, out, size, guias=True):
     if guias:
         d = ImageDraw.Draw(img)
         d.rectangle([gz["izquierda"], gz["arriba"], W - gz["derecha"], H - gz["abajo"]], outline=(255, 0, 80, 150), width=2)
+    if out is None:
+        return img.convert("RGB")
     img.convert("RGB").save(out)
 
 
