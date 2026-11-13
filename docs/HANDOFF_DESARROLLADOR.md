@@ -5,6 +5,8 @@
 **Plan de producto y negocio (página web):** https://claude.ai/artifact/NUktM7NVQrHoSChQsYtmTn
 Se abre con el enlace. Si no puede abrirla, pídale acceso a Nixon. Este archivo trae lo esencial.
 
+**Detalle operativo para replicarlo** (requisitos, rutas a cambiar, comandos, formato de archivos, estado): [`docs/HANDOFF_FLUJO_COMPLETO.md`](HANDOFF_FLUJO_COMPLETO.md)
+
 **Fecha:** 13 nov. 2026 · **Rama:** `feature/N360-029-handoff-dev`
 
 ---
@@ -91,7 +93,7 @@ Un flujo que convierte tomas reales (dron, celular, fotos) y datos verificados d
 - **Resultado:** A, B y C ya tienen la voz de Nixon y quedaron como finales. Los otros 9 solo tienen música.
 
 ### Paso 10 · Artes (Codex)
-- Codex hizo 41 artes (22 de feed 4:5, 15 historias 9:16 y 7 de pauta) con calendario de 15 días, la paleta azul y amarilla del sitio web, y el logo original.
+- Codex hizo los artes: 44 archivos, que son 22 de feed 4:5, 15 historias 9:16 y 7 de pauta. Sus informes dicen "41 artes"; falta aclarar la diferencia. con calendario de 15 días, la paleta azul y amarilla del sitio web, y el logo original.
 - Los carruseles son D02_recorrido (4 láminas), D06_visita (3) y D11_preguntas (3). El resto son de una lámina.
 - **Archivos:** `scripts/codex_artes_15d.py`, `scripts/codex_identidad_santa_isabel.py`, `brands/nixon-remax/codex_campana_15_dias.json`, `docs/tools/CODEX_ARTES_SANTA_ISABEL.md`, `docs/tools/SANTA_ISABEL_PALETA_AZUL.md`.
 
@@ -111,7 +113,7 @@ Un flujo que convierte tomas reales (dron, celular, fotos) y datos verificados d
 | Pieza | Estado |
 |---|---|
 | 12 videos 9:16 de 30 s | Renderizados. A, B y C con voz y aprobados; los demás esperan voz y revisión |
-| 41 artes | Hechos por Codex. Las fechas del calendario hay que correrlas |
+| 44 artes | Hechos por Codex. Las fechas del calendario hay que correrlas |
 | Versiones 4:5 de los videos, portadas y copy por video | Pendiente |
 | Whisper para alinear voz | Propuesto, sin aprobar |
 | Nueva paleta del sitio web | Aplicada en artes. Falta adaptar el kit de video si cambia |
