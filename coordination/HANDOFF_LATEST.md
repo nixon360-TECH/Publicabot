@@ -1,4 +1,15 @@
-# HANDOFF — 2026-11-13 — N360-027
+# HANDOFF — 2026-11-13 — N360-028
+
+- **Corrección de Nixon:** conservar el logo original de Santa Isabel y su tono verde. Los artes ya aprobados quedan como están porque el logo transparente no contiene fondo de color.
+- **Hecho localmente:** encabezado, pie y favicon del sitio restaurados al archivo aprobado `santa-isabel-logo-aprobado.jpg`; interfaz, mapa y catálogo siguen navy/amarillo. Perfil verde original copiado a `05_RENDERS_DRAFT/N360-20261112-0001/codex_identidad_logo_original_v02/` relativa a `E:\NIXON360_CONTENTOPS`.
+- **Campaña:** `codex_artes_15d_azul_amarillo_v03/` no se modificó; el hash de su ZIP se conserva.
+- **Probado:** 20/20 pruebas del sitio, chequeos de sintaxis y revisión visual de escritorio. El navegador cargó el logo aprobado y el favicon original con estado 200.
+- **Estado:** corrección lista para producción. La revisión automática exige autorización explícita ligada a publicar esta versión corregida; el sitio público permanece en la versión 19 hasta recibirla.
+- **Evidencia:** rama `codex/N360-028-santa-isabel-logo-original`; fuente de ChatGPT Sites preparada localmente.
+
+---
+
+## Handoff anterior — 2026-11-13 — N360-027
 
 - **Confirmado por Nixon:** sustituir la paleta verde de Santa Isabel por azul y amarillo en artes, identidad y sitio web; conservar el contraste que le gustó en la campaña.
 - **Paleta fuente:** navy `#1B2A4A`, azul oscuro `#111D35`, apoyo `#2F5286`, amarillo `#ECD628`, blanco `#FFFFFF`. Fotografías naturales; logos oficiales de RE/MAX y Banco Industrial intactos.

@@ -21,4 +21,5 @@
 | Meta Marketing API / Google Ads API | NO CONECTADO | Fase 4 |
 | Repos hermanos: Buscabot-NBS, santa-isabel-sitio, santa-isabel-media-ops | HISTÓRICO (vistos el 8-nov) | no auditados aún |
 | Sitio `lotificacionsantaisabel.com` | PUBLICADO 2026-11-13: ChatGPT Sites versión 19, identidad azul/amarilla N360-027 | Dominio responde 200; nuevo CSS, favicon y catálogo confirmados; 20 pruebas pasan |
+| Corrección logo Santa Isabel N360-028 | LISTA_LOCAL: logo verde original restaurado en encabezado, pie y favicon; paleta azul/amarilla conservada; despliegue pendiente de autorización específica | 20 pruebas pasan; revisión visual aprobada; campaña v03 no modificada |
 | Chat previo «PublicaBOT» | NO ENCONTRADO | Nixon lo traerá |
