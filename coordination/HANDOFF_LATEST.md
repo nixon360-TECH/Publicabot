@@ -1,4 +1,17 @@
-# HANDOFF — 2026-11-11 — N360-001
+# HANDOFF — 2026-11-12 — N360-025
+
+- **Hecho:** workspace de Codex vinculado al repositorio real como worktree de la rama `feature/N360-025-santa-isabel-videos-codex`, desde `9a4fdd7`. Conexión con GitHub comprobada por conector y Git local. Por elección directa de Nixon, se produjeron clips con movimiento desde las fotos de calles limpias.
+- **Entregado:** 12 clips silenciosos de 6 segundos (seis fotos en 1080x1350 y 1080x1920), previews por formato, galería local, plan editable y QA. Carpeta relativa a MEDIA_ROOT de ContentOps: `05_RENDERS_DRAFT/N360-20261112-0001/codex_fotos_limpias_v02/`. La foto `calles-internas` está excluida. La versión v02 desplaza cuatro encuadres hacia las curvas de las calles; v01 se conserva como historial.
+- **Probado:** resolución, 150 frames por clip, duración, píxeles cuadrados, yuv420p, decodificación completa, presencia de movimiento; dos pruebas de geometría de recorte. Rango de color corregido tras la primera muestra. QA y hashes en la carpeta del lote.
+- **Alcance:** movimiento 2D sobre fotos ya editadas. Son recursos de montaje sin voz, música, copy o logos. El 9:16 recorta más terreno y amplía la fuente horizontal de 1672x941. No se modifica la escena ni se genera un vuelo nuevo.
+- **Coordinación:** archivos nuevos `scripts/render_fotos_limpias.py`, `brands/nixon-remax/motion_kit/fotos_limpias_motion.json`, `tests/test_photo_motion.py`; uso en `docs/tools/FOTOS_LIMPIAS_MOTION.md`. Los scripts y cierres que trabaja Claude no se modificaron.
+- **Pendiente:** elección de clips por Nixon e integración en los montajes de Claude. El lote conserva estado `RENDERED_DRAFT` y `publish_authorized=false`.
+- **Siguiente paso:** revisar `index.html`, seleccionar tomas e importar los MP4 del formato elegido al montaje. Medios, previews y QA local permanecen fuera de Git.
+- **Compatibilidad:** el plan de ocho videos incorporado por Claude en `a9089e2` identifica este material como base del video 7. PR #5 compatible con esa actualización. Se deja `manifest.json` con agente, fecha, script, entradas/salidas y hashes. La rama N360-025 fue creada antes de la nueva convención `codex/`; los renders usan el directorio propio `codex_*`.
+
+---
+
+## Handoff anterior — 2026-11-11 — N360-001 (histórico)
 
 - **Hecho:** instalación y auditoría de la PC. FFmpeg 9.0.2 instalado (winget); Git y Node ya existían; repo clonado en `C:\NBS\publicabot`; FilmCraft v0.20.1 instalado (hash SHA256 verificado); MCP `filmcraft` registrado. Specs, discos y MEDIA_ROOT documentados en `docs/CURRENT_STATE.md`. Rama `feature/N360-001-pc-audit` (sin commit ni push).
 - **Probado:** `ffmpeg -version`; `claude mcp list` → `filmcraft ... Connected`. NO probado: edición real con FilmCraft, Dispatch.
