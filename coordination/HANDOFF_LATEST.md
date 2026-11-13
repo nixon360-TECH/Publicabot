@@ -6,7 +6,9 @@
 - **Campaña entregada:** 41 diseños regenerados en `codex_artes_15d_azul_amarillo_v03/`, con ZIP de 31.5 MB, calendario, copys, tres carruseles y tres variantes de pauta. QA: dimensiones, decodificación, zonas seguras, datos, hashes y revisión visual aprobados. Sin publicación ni gasto.
 - **Sitio web:** código original de `lotificacionsantaisabel.com` recuperado desde ChatGPT Sites. Versión local azul/amarilla completa: UI, botones, favicon, logo derivado, mapa, plano SVG y catálogo PDF. Se preservaron inventario, contactos, fotografías, lógica de financiamiento y logos de terceros.
 - **Probado:** 20/20 pruebas del sitio, chequeos de sintaxis, revisión móvil en navegador y render visual de las dos páginas del catálogo PDF. No quedan referencias principales a la antigua paleta verde en los recursos de interfaz actualizados.
-- **Estado:** listo para despliegue. La revisión automática detuvo la sincronización porque el master exige autorización explícita ligada a esta versión concreta. Próximo paso: Nixon autoriza publicar la versión N360-027 en producción; entonces sincronizar, desplegar y verificar `lotificacionsantaisabel.com`.
+- **Despliegue autorizado y ejecutado:** Nixon autorizó expresamente publicar N360-027. ChatGPT Sites versión 19, commit fuente `0387db36b66028fba7a707c8de4fe75b39b04410`, desplegada el 13 de noviembre de 2026.
+- **Verificación pública:** `https://lotificacionsantaisabel.com` responde 200 y entrega `styles.css?v=20261112-azul-amarillo`, favicon azul, navy `#1B2A4A` y amarillo `#ECD628`; no entrega el antiguo verde primario. Revisión visual de escritorio aprobada.
+- **Estado:** `DONE`. No se publicaron artes en redes ni se activó pauta; esos pasos mantienen aprobación separada.
 - **Evidencia:** `brands/santa-isabel/palette.json`, `scripts/codex_identidad_santa_isabel.py`, `scripts/codex_artes_15d.py`, `docs/tools/SANTA_ISABEL_PALETA_AZUL.md`.
 
 ---
