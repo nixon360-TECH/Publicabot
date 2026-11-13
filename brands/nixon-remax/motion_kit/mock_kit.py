@@ -196,3 +196,63 @@ if __name__ == "__main__":
     cierre_v2(SM + r"\bg_lote_9x16.png", foto, SM + r"\mock_cierre_v2_9x16.png", (1080, 1920))
     cierre_v2(SM + r"\bg_lote_4x5.png", foto, SM + r"\mock_cierre_v2_4x5.png", (1080, 1350))
     print("v2 OK")
+
+
+def cierre_v3(bg_path, foto, out, size):
+    """v3: calles asfaltadas protagonistas; asesor a la derecha con nombre pequeno debajo;
+    RE/MAX y Banco Industrial grandes a la izquierda; solo sombras (sin placas)."""
+    W, H = size
+    tall = H > 1500
+    k = 1.0 if tall else 0.82
+    gz = cfg["plataformas"]["master_9x16" if tall else "post_4x5"]["zona_segura_px"]
+    img = Image.open(bg_path).convert("RGBA")
+    img = Image.alpha_composite(img, gradient(size, int(H * 0.50), int(H * 0.80), 0.0, 0.62))
+    img = Image.alpha_composite(img, gradient(size, 0, int(H * 0.20), 0.40, 0.0))
+    cx = W // 2
+    ybase = H - gz["abajo"]
+    # logo proyecto
+    si = Image.open(P + "/assets/logo_si_horizontal.png").convert("RGBA")
+    sw = int(520 * k); si = si.resize((sw, int(si.height * sw / si.width)), Image.LANCZOS)
+    lay = Image.new("RGBA", size, (0, 0, 0, 0)); lay.paste(si, ((W - sw) // 2, gz["arriba"] + 20), si)
+    img = comp(img, lay)
+    # frase + telefono
+    y_tel = ybase - int(345 * k)
+    img = comp(img, text_layer(size, (cx, y_tel - int(150 * k)), cfg["cierre"]["frase"], F(SEGBL, int(46 * k)), (240, 232, 214, 255), "ms", 1))
+    img = comp(img, text_layer(size, (cx, y_tel), cfg["cierre"]["telefono"]["texto"], F(IMPACT, int(132 * k)), YEL + (255,), "ms", 2))
+    # izquierda: RE/MAX grande, Banco Industrial grande
+    x0 = gz["izquierda"]
+    rm = Image.open(cfg["logos"]["remax_abajo_centro"]["archivo"]).convert("RGBA")
+    rw = int(380 * k); rm = rm.resize((rw, int(rm.height * rw / rm.width)), Image.LANCZOS)
+    bi = Image.open(P + "/assets/logo_bi_blanco.png").convert("RGBA")
+    bw = int(300 * k); bi = bi.resize((bw, int(bi.height * bw / bi.width)), Image.LANCZOS)
+    ytop = ybase - int(345 * k)
+    lay = Image.new("RGBA", size, (0, 0, 0, 0))
+    lay.paste(rm, (x0, ytop), rm)
+    lay.paste(bi, (x0 + 4, ytop + rm.height + int(26 * k)), bi)
+    img = comp(img, lay)
+    yl = ytop + rm.height + int(26 * k) + bi.height + int(34 * k)
+    for t in ("*Financiamiento con Banco Industrial", "sujeto a evaluación del banco.", "Sujeto a disponibilidad."):
+        img = comp(img, text_layer(size, (x0 + 4, yl), t, F(SEGBL, int(21 * k)), (255, 255, 255, 235), "ls", 1), shadow=False)
+        yl += int(25 * k)
+    # derecha: asesor + nombre pequeno debajo
+    ph = Image.open(foto).convert("RGBA")
+    crop = ph.crop((0, 0, ph.width, int(ph.height * 0.64)))
+    phh = int(330 * k)
+    crop = crop.resize((int(crop.width * phh / crop.height), phh), Image.LANCZOS)
+    m = np.array(crop.split()[3], np.float32); fade = np.clip((np.arange(phh)[:, None] - (phh - 50)) / 50.0, 0, 1)
+    crop.putalpha(Image.fromarray((m * (1 - fade)).astype(np.uint8)))
+    px = W - gz["derecha"] - crop.width + 20; py = ybase - int(26 * k) - phh - int(10 * k) + 30
+    lay = Image.new("RGBA", size, (0, 0, 0, 0)); lay.paste(crop, (px, py), crop)
+    img = Image.alpha_composite(img, shadow_layer(lay, 18, 0, 0.6, (0, 8)))
+    img = Image.alpha_composite(img, lay)
+    img = comp(img, text_layer(size, (px + crop.width // 2 - 20, ybase - 6), "Nixon Hernández", F(GEORI, int(40 * k)), (255, 255, 255, 255), "ms"))
+    d = ImageDraw.Draw(img)
+    d.rectangle([gz["izquierda"], gz["arriba"], W - gz["derecha"], H - gz["abajo"]], outline=(255, 0, 80, 150), width=2)
+    img.convert("RGB").save(out)
+
+
+if __name__ == "__main__":
+    foto = P + "/assets/nixon_recorte.png"
+    cierre_v3(SM + "/bgc_calles-desde-arriba_9x16.png", foto, SM + "/mock_cierre_v3_9x16.png", (1080, 1920))
+    cierre_v3(SM + "/bgc_calles-desde-arriba_4x5.png", foto, SM + "/mock_cierre_v3_4x5.png", (1080, 1350))
+    print("v3 OK")

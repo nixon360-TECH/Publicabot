@@ -60,6 +60,11 @@ Estado: **borrador, modo HANDOFF. Nada se publica sin aprobación explícita de 
 ## 8. Pendiente
 - Voz de Nixon (los clips de dron no tienen audio); retemporizar subtítulos.
 - Confirmar con Nixon dónde marcar pines (alcaldía, carretera principal, otros).
-- Decidir si las fotos de calles limpias editadas llevan la leyenda «Imagen ilustrativa».
+- (Resuelto) Las fotos de calles limpias NO llevan leyenda «Imagen ilustrativa» (decisión de Nixon).
 - Motor del kit + video 2 con vista previa; luego los otros 5 y las versiones 4:5.
 - `prepublish-qa` y aprobación explícita antes de cualquier publicación.
+
+## 9. Cierre v3 (vigente, pedido de Nixon)
+- Asesor a la **derecha**, nombre pequeño debajo de la foto. RE/MAX y Banco Industrial **grandes a la izquierda** (sin placas, con sombra).
+- Fondo: solo fotos editadas con calles limpias. Para el cierre se usa `SI_FOTO_calles-desde-arriba_v01.jpg`. **No usar `SI_FOTO_calles-internas_v01.jpg`** (Nixon la ve falsa). Lo importante son las calles asfaltadas de la lotificación.
+- Función `cierre_v3` en `brands/nixon-remax/motion_kit/mock_kit.py`.
