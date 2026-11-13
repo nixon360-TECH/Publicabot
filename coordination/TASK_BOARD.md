@@ -2,6 +2,7 @@
 
 | ID | P | Tarea | Owner | Estado |
 |---|---|---|---|---|
+| N360-027 | P0 | Unificar Santa Isabel en azul y amarillo: identidad, campaña y sitio existente | codex / NBS publicabot CHATGPT | READY_FOR_DEPLOY_APPROVAL (41 artes, identidad y sitio terminados; rama `codex/N360-027-santa-isabel-paleta`) |
 | N360-000 | P0 | Base del repo (contexto, estilo, reglas, skills) | claude | IN_REVIEW (PR) |
 | N360-001 | P0 | Auditoría PC: specs, MEDIA_ROOT, FFmpeg/Whisper/Auto-Editor/DaVinci | claude-code (local) | IN_REVIEW (rama `feature/N360-001-pc-audit`) |
 | N360-003 | P0 | Propiedad piloto verificada | Nixon | TODO |
