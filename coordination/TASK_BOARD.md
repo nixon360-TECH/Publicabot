@@ -14,3 +14,4 @@
 | N360-022 | P1 | Stack de video: FilmCraft identificado e investigado | claude | DONE (aprobado) |
 | N360-023 | P0 | Piloto Santa Isabel con FilmCraft (dron + fotos reales) | claude-code | TODO (tras N360-001) |
 | N360-013 | P2 | Meta Marketing API / Google Ads API (Fase 4) | — | TODO |
+| N360-025 | P0 | Videos con movimiento desde fotos limpias de Santa Isabel | codex | IN_REVIEW (12 clips de 6 s: seis fotos en 4x5 y 9x16; rama `feature/N360-025-santa-isabel-videos-codex`) |
