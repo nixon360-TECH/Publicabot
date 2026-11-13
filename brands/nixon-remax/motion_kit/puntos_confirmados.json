@@ -1,0 +1,29 @@
+{
+  "_nota": "Puntos y calles confirmados por Nixon el 2026-11-12 (chat) sobre la cuadricula grid_pines.png y el plano de distribucion de lotes (WhatsApp). Solo estos nombres pueden salir en pantalla.",
+  "calles_lotificacion_color_fucsia": [
+    "Calle Isabel Poniente",
+    "Calle Los Colibríes",
+    "Calle Isabel Sur",
+    "Calle Isabel Oriente"
+  ],
+  "vias_externas": {
+    "camino_vecinal_al_rio": {"color_en_grid": "verde", "nota": "En el plano: 'Camino vecinal al Río' (lado poniente)"},
+    "carretera_al_jicaral": {"color_en_grid": "amarillo", "nota": "Nixon dice 'carretera al Jicaral'; el plano rotula 'Camino vecinal al Jicaral'. PENDIENTE: confirmar cual nombre va en pantalla"}
+  },
+  "puntos_de_referencia": {
+    "parque_central_de_comacaran": {"marca": "flecha roja", "toma": "0199", "celda": "C2"},
+    "instituto_nacional_de_comacaran": {"marca": "flecha verde", "tomas": {"0193": "B3", "0199": "B4"}},
+    "equipo_de_bombeo_de_la_alcaldia": {"fuente": "plano, vertice norte del terreno", "nota": "Aparece en el plano; NO confirmado en las tomas. No usar en pantalla sin confirmar."}
+  },
+  "mapeo_grid_pines_png": {
+    "0193": {"fucsia": "calles del lote (B4-D6)", "verde": "A4-B4 (camino al rio)", "amarillo": "D3-D5 (Jicaral)"},
+    "0197": {"fucsia": "A4-D4 y B3-C4", "amarillo": "A3-D2 (Jicaral)"},
+    "0199": {"fucsia": "B5-C6", "verde": "A5-C5 (camino al rio)", "amarillo": "C5-C6 (Jicaral)"},
+    "0196": {"fucsia": "A3-D3 y A4-C5", "verde": "A6-D6 (camino al rio)", "amarillo": "A2-A3 (Jicaral)"}
+  },
+  "no_usar_en_pantalla": [
+    "Las etiquetas 'Apartado' del plano (disponibilidad interna)",
+    "Numeros de lote o areas del plano sin verificar contra el snapshot",
+    "Nombres de colindantes (Julio Cesar Argueta, Juan Gonzales, Julio Diaz, Nicolas Bustillo, Lilian Armida Alvarez)"
+  ]
+}

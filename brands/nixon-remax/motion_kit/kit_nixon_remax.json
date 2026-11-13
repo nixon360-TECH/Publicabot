@@ -1,0 +1,69 @@
+{
+  "_nota": "KIT UNICO DE MARCA Y MOTION. Todos los videos leen este archivo. Cambiar aqui cambia todos. Para RE/MAX Eleva: copiar a kit_remax_eleva.json y cambiar 'cierre' y 'logos'.",
+  "version": "1.0",
+  "estado": "BORRADOR - pendiente aprobacion de Nixon sobre mocks",
+  "colores": {
+    "acento_amarillo": "#ECD628",
+    "crema_conector": "#F0E8D6",
+    "blanco": "#FFFFFF",
+    "contorno_negro": "#000000",
+    "pin_relleno": "#ECD628",
+    "pin_borde": "#101010",
+    "contorno_lote": "#ECD628"
+  },
+  "texto": {
+    "conector": {"fuente": "Georgia Italic", "color": "crema_conector", "contorno_px": 1},
+    "ligero": {"fuente": "Segoe UI Black", "color": "blanco", "contorno_px": 1},
+    "acento": {"fuente": "Arial Nova Cond Bold", "color": "acento_amarillo", "contorno_px": 1},
+    "protagonista": {"fuente": "Impact", "relleno": "degradado+nubes, auto por contraste", "contorno_px": 2},
+    "sombra": "silueta (8 px) + amplia",
+    "max_ancho_px_9x16": 940
+  },
+  "pines": {
+    "estilo": "gota amarilla con borde negro fino, punto blanco central, etiqueta en pastilla oscura semitransparente con texto blanco Segoe UI Black, sombra doble",
+    "animacion": "cae desde arriba con rebote corto (0.35 s), etiqueta se despliega a la derecha (0.25 s), respiracion suave de 3 % mientras esta en pantalla",
+    "tamano_px_9x16": {"pin": 64, "etiqueta_altura": 56, "texto": 34},
+    "max_pines_simultaneos": 3,
+    "regla": "solo etiquetas confirmadas por Nixon; nada identificado desde el aire sin confirmar"
+  },
+  "contorno_lote": {
+    "estilo": "linea amarilla de 5 px con brillo, se dibuja en 1.2 s vertice a vertice, relleno amarillo al 14 %, esquinas con puntos blancos",
+    "seguimiento": "homografia ORB sobre la toma; si se pierde, se corta y se muestra solo en tomas estables"
+  },
+  "logos": {
+    "proyecto_arriba_centro": {"archivo": "assets/logo_si_horizontal.png", "ancho_px": 520, "y": 270, "sombra": "doble 14/5"},
+    "remax_abajo_centro": {"archivo": "E:/Lotificación Alvarez/_marca/01_logos/remax/2.png", "ancho_px": 270, "base_y": 1560, "recolorear": false}
+  },
+  "cierre": {
+    "duracion_s": 4.2,
+    "fondo": "ultima toma de la lotificacion, oscurecida 35 % + vineta, sin placas",
+    "foto": {"archivo": "assets/nixon_recorte.png", "animacion": "zoom in 0.92->1.00 (1.4 s), mantiene, zoom out 1.00->0.94 (0.9 s)", "sombra": "silueta suave"},
+    "firma": {"texto": "Nixon Hernández", "fuente": "Georgia Italic", "tamano_px": 96, "color": "blanco"},
+    "frase": "Escríbanos para agendar su visita",
+    "telefono": {"texto": "+503 7956 4399", "fuente": "Impact", "tamano_px": 128, "color": "acento_amarillo"},
+    "banco_asterisco": "*Financiamiento con Banco Industrial sujeto a evaluación del banco.",
+    "disponibilidad": "Sujeto a disponibilidad.",
+    "nota": "El nombre solo aparece en la firma. Para Eleva: cambiar foto/firma/telefono/logo."
+  },
+  "plataformas": {
+    "master_9x16": {
+      "uso": "Reels IG, Reels FB, Stories IG y FB",
+      "tamano": [1080, 1920],
+      "zona_segura_px": {"arriba": 250, "abajo": 350, "derecha": 60, "izquierda": 60},
+      "nota": "No hay medida oficial de Meta; se usa la mas estricta de Reels y Stories. Validar en el telefono."
+    },
+    "post_4x5": {
+      "uso": "Publicacion de Instagram y Facebook en el feed",
+      "tamano": [1080, 1350],
+      "zona_segura_px": {"arriba": 120, "abajo": 160, "derecha": 50, "izquierda": 50},
+      "nota": "Se re-compone el diseno, no se recorta el 9x16."
+    },
+    "post_1x1_opcional": {"uso": "Facebook / carrusel", "tamano": [1080, 1080], "zona_segura_px": {"arriba": 90, "abajo": 120, "derecha": 50, "izquierda": 50}},
+    "codificacion": {
+      "video": "H.264 High, yuv420p, 25 fps, CRF 16 con maxrate 12M, faststart",
+      "audio": "AAC 192k 48 kHz, loudnorm I=-14 TP=-1.5 LRA=9",
+      "duracion_recomendada_s": "15-30",
+      "portada": "4:5 y 9:16 por separado, texto dentro de zona segura"
+    }
+  }
+}
