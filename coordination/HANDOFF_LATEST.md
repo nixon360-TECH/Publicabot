@@ -1,4 +1,16 @@
-# HANDOFF — 2026-11-13 — N360-028
+# HANDOFF — 2026-11-15 — N360-029
+
+- **Encargo:** personalizar la campaña de 15 días de Santa Isabel para cada agente, cambiando únicamente nombre, teléfono y foto. Primero se produjo un solo piloto; los otros cuatro esperan aprobación de Nixon.
+- **Implementado:** `scripts/codex_artes_15d.py` acepta `--agente <carpeta>`, lee datos y calendario desde MEDIA_ROOT, conserva el copy aprobado, sustituye el cierre y el retrato del día 10, excluye las variantes de pauta y usa el snapshot canónico del repositorio.
+- **Entregado fuera de Git:** 22 láminas de feed 1080×1350 y 15 historias 1080×1920 en `<MEDIA_ROOT>/04_PROJECTS_EDITABLE/agentes/<id>/artes/`. Incluye copys, galería, hojas de revisión, manifiesto con hashes y `qa_report.json`.
+- **Autorevisión:** 37/37 archivos decodifican; dimensiones, nombres, zonas seguras, avisos y hashes aprobados. La estructura de elementos coincide con la campaña original en los 37 diseños. Revisión visual completa y muestras a tamaño final aprobadas. Contraste medido: blanco/navy 14.22:1 y amarillo/navy 9.63:1.
+- **Privacidad:** ningún nombre, teléfono, foto ni salida de agente se añadió al repositorio. El código y las pruebas usan marcadores genéricos.
+- **Estado:** `IN_REVIEW`. No se publicó, no se subió a Drive, no se envió a agentes y no se activó pauta. Siguiente paso: Nixon aprueba o pide ajustes al piloto; solo después se renderizan los otros cuatro.
+- **Evidencia Git:** rama `feature/N360-029-artes-agentes-santa-isabel`; `scripts/codex_artes_15d.py`; `tests/test_agent_art_campaign.py`.
+
+---
+
+## Handoff anterior — 2026-11-13 — N360-028
 
 - **Corrección de Nixon:** conservar el logo original de Santa Isabel y su tono verde. Los artes ya aprobados quedan como están porque el logo transparente no contiene fondo de color.
 - **Hecho localmente:** encabezado, pie y favicon del sitio restaurados al archivo aprobado `santa-isabel-logo-aprobado.jpg`; interfaz, mapa y catálogo siguen navy/amarillo. Perfil verde original copiado a `05_RENDERS_DRAFT/N360-20261112-0001/codex_identidad_logo_original_v02/` relativa a `E:\NIXON360_CONTENTOPS`.

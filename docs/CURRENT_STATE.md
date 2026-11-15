@@ -22,4 +22,5 @@
 | Repos hermanos: Buscabot-NBS, santa-isabel-sitio, santa-isabel-media-ops | HISTÓRICO (vistos el 8-nov) | no auditados aún |
 | Sitio `lotificacionsantaisabel.com` | PUBLICADO 2026-11-13: ChatGPT Sites versión 20, interfaz azul/amarilla con logo verde original N360-028 | Dominio público verificado visualmente; encabezado y marca verde, CTA amarillo y UI navy; 20 pruebas pasan |
 | Corrección logo Santa Isabel N360-028 | DONE: logo verde original restaurado en encabezado, pie, favicon y perfil; los 41 artes permanecen intactos | Commit fuente `c73f4278d1da041fc9d44dd25b8192079b2e8264`; despliegue `appgdep_6af71ae0bedc819181643a1409411e31`; campaña v03 no modificada |
+| Artes Santa Isabel por agente N360-029 | IN_REVIEW: primer piloto completo, 22 láminas de feed y 15 historias; los demás agentes no se han renderizado | Salida y QA en `<MEDIA_ROOT>/04_PROJECTS_EDITABLE/agentes/<id>/artes/`; datos personales fuera de Git; publicación y Drive no autorizados |
 | Chat previo «PublicaBOT» | NO ENCONTRADO | Nixon lo traerá |
