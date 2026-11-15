@@ -2,7 +2,7 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from scripts.codex_artes_15d import caption, create_readme_html, parse_agent_calendar, split_display_name
+from scripts.codex_artes_15d import caption, create_gallery, create_readme_html, parse_agent_calendar, split_display_name
 
 
 class AgentArtCampaignTests(unittest.TestCase):
@@ -36,6 +36,16 @@ class AgentArtCampaignTests(unittest.TestCase):
             page = (output / "LEEME.html").read_text(encoding="utf8")
         self.assertIn('<html lang="es">', page)
         self.assertIn('href="index.html"', page)
+
+    def test_gallery_reserves_thumbnail_space(self):
+        with tempfile.TemporaryDirectory() as directory:
+            output = Path(directory)
+            calendar = [{"day": 1, "date": "2026-11-16", "angle": "Ángulo", "caption": "Copy"}]
+            exports = [{"day": 1, "file": "feed_4x5/muestra.jpg", "format": "4x5", "page": 1}]
+            create_gallery(output, calendar, exports, {"nombre": "NOMBRE"})
+            page = (output / "index.html").read_text(encoding="utf8")
+        self.assertIn('width="320" height="420"', page)
+        self.assertIn('a,summary{cursor:pointer}', page)
 
 
 if __name__ == "__main__":
