@@ -383,6 +383,7 @@ def main():
     owner_text=agent["nombre"] if agent else "Nixon Hernández"
     paid_line="" if agent else "- La carpeta de pauta contiene tres alternativas; no son campañas activadas.\n"
     (args.output/"LEEME.md").write_text(f"# Santa Isabel · artes de 15 días · {owner_text}\n\nPaquete local del {period_text}. Fechas solo en el calendario.\n\n- Feed: JPG de 1080×1350. Historias: JPG de 1080×1920.\n- Carruseles: mantener el orden 01, 02, 03, 04 de cada día.\n{paid_line}- Copys para Instagram y Facebook en la carpeta copys.\n- Las fotos provienen de la carpeta de fotos limpias indicada por Nixon. Se conservan sus ediciones previas.\n- Los datos corresponden al snapshot verificado por el usuario el 12 de noviembre. Revalidar precio y disponibilidad antes de publicar cada pieza.\n- No se agregó voz, imagen sintética ni servicios no verificados.\n- Editable: plan_editable.json + script del repositorio; fuentes, colores y logos del kit.\n\nEstado: borradores pendientes de selección y aprobación de Nixon. No hay publicación, carga a Drive ni gasto activados.\n",encoding="utf8")
+    create_readme_html(args.output)
     create_gallery(args.output,calendar,exports,agent)
     create_sheets(args.output,exports)
     if not args.pilot and not agent:
@@ -410,6 +411,12 @@ def create_sheets(out,exports):
         sheet.save(out/f"revision/hoja_{fmt}.jpg",quality=92)
 
 
+def create_readme_html(out):
+    content=html.escape((out/"LEEME.md").read_text(encoding="utf8"))
+    page='<!doctype html><html lang="es"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Instrucciones · Santa Isabel</title><style>body{margin:0;background:#101927;color:#fff;font:17px/1.65 system-ui}main{max-width:840px;margin:auto;padding:40px 24px}pre{white-space:pre-wrap;font:inherit}a{color:#ecd628}a:focus{outline:3px solid #ecd628;outline-offset:3px}</style><main><p><a href="index.html">Volver a la galería</a></p><pre>'+content+'</pre></main></html>'
+    (out/"LEEME.html").write_text(page,encoding="utf8")
+
+
 def create_gallery(out,calendar,exports,agent=None):
     chunks=[]
     for item in calendar:
@@ -420,7 +427,7 @@ def create_gallery(out,calendar,exports,agent=None):
     owner=html.escape(agent["nombre"] if agent else "Nixon Hernández")
     paid_section='' if agent else '<section><h2>Pauta inicial · tres alternativas</h2><div class="images">'+paid+'</div></section>'
     zip_link='' if agent else '<a href="SANTA_ISABEL_15_DIAS.zip">Descargar paquete completo</a> · '
-    page='<!doctype html><html lang="es"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>NBS publicabot CHATGPT · Santa Isabel</title><style>body{margin:0;background:#101927;color:#fff;font:16px system-ui}header,main{max-width:1280px;margin:auto;padding:24px}h1{font-size:38px}p{line-height:1.6;color:#dedee3}section{padding:24px 0;border-top:1px solid #445066}h2{font-size:20px}a{color:#ecd628;text-decoration:none}a:focus,summary:focus{outline:3px solid #ecd628;outline-offset:3px}img{width:100%;max-height:380px;object-fit:contain;background:#182742}span{display:block;font-size:13px;padding:8px}.images{display:flex;gap:14px;overflow:auto}.images a{flex:0 0 220px}pre{white-space:pre-wrap;font:16px system-ui;line-height:1.6}summary{cursor:pointer;margin-top:16px}.tag{color:#ecd628}</style><header><p class="tag">NBS PUBLICABOT CHATGPT</p><h1>Santa Isabel · 15 días · '+owner+'</h1><p>Collages, carruseles y artes individuales. Borradores para revisión. Abra cada imagen para verla completa.</p><p>'+zip_link+'<a href="LEEME.md">Instrucciones</a></p></header><main>'+paid_section+''.join(chunks)+'</main></html>'
+    page='<!doctype html><html lang="es"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>NBS publicabot CHATGPT · Santa Isabel</title><style>body{margin:0;background:#101927;color:#fff;font:16px system-ui}header,main{max-width:1280px;margin:auto;padding:24px}h1{font-size:38px}p{line-height:1.6;color:#dedee3}section{padding:24px 0;border-top:1px solid #445066}h2{font-size:20px}a{color:#ecd628;text-decoration:none}a:focus,summary:focus{outline:3px solid #ecd628;outline-offset:3px}img{width:100%;max-height:380px;object-fit:contain;background:#182742}span{display:block;font-size:13px;padding:8px}.images{display:flex;gap:14px;overflow:auto}.images a{flex:0 0 220px}pre{white-space:pre-wrap;font:16px system-ui;line-height:1.6}summary{cursor:pointer;margin-top:16px}.tag{color:#ecd628}</style><header><p class="tag">NBS PUBLICABOT CHATGPT</p><h1>Santa Isabel · 15 días · '+owner+'</h1><p>Collages, carruseles y artes individuales. Borradores para revisión. Abra cada imagen para verla completa.</p><p>'+zip_link+'<a href="LEEME.html">Instrucciones</a></p></header><main>'+paid_section+''.join(chunks)+'</main></html>'
     (out/"index.html").write_text(page,encoding="utf8")
 
 

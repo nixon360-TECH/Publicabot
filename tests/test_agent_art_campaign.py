@@ -2,7 +2,7 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from scripts.codex_artes_15d import caption, parse_agent_calendar, split_display_name
+from scripts.codex_artes_15d import caption, create_readme_html, parse_agent_calendar, split_display_name
 
 
 class AgentArtCampaignTests(unittest.TestCase):
@@ -27,6 +27,15 @@ class AgentArtCampaignTests(unittest.TestCase):
     def test_advisor_name_keeps_two_line_composition(self):
         self.assertEqual(split_display_name("NOMBRE APELLIDO"), ["NOMBRE", "APELLIDO"])
         self.assertEqual(split_display_name("NOMBRE DE APELLIDO"), ["NOMBRE DE", "APELLIDO"])
+
+    def test_readme_has_browser_friendly_html(self):
+        with tempfile.TemporaryDirectory() as directory:
+            output = Path(directory)
+            (output / "LEEME.md").write_text("# Instrucciones", encoding="utf8")
+            create_readme_html(output)
+            page = (output / "LEEME.html").read_text(encoding="utf8")
+        self.assertIn('<html lang="es">', page)
+        self.assertIn('href="index.html"', page)
 
 
 if __name__ == "__main__":
