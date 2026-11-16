@@ -2,7 +2,7 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from scripts.codex_artes_15d import caption, create_gallery, create_readme_html, parse_agent_calendar, split_display_name
+from scripts.codex_artes_15d import caption, create_agent_resources, create_gallery, create_readme_html, parse_agent_calendar, split_display_name
 
 
 class AgentArtCampaignTests(unittest.TestCase):
@@ -46,6 +46,23 @@ class AgentArtCampaignTests(unittest.TestCase):
             page = (output / "index.html").read_text(encoding="utf8")
         self.assertIn('width="320" height="420"', page)
         self.assertIn('a,summary{cursor:pointer}', page)
+
+    def test_agent_resources_use_confirmed_water_provider_and_block_electricity(self):
+        snapshot = {
+            "location": "UBICACIÓN",
+            "public_facts": {
+                "price_text": "PRECIO",
+                "min_lot_size_varas2": 286,
+                "water_provider_text": "El agua es provista por la alcaldía (ANDA).",
+            },
+        }
+        agent = {"nombre": "NOMBRE", "telefono": "+503 0000 0000"}
+        with tempfile.TemporaryDirectory() as directory:
+            output = Path(directory)
+            create_agent_resources(output, snapshot, agent)
+            faq = (output / "recursos_informacion_general" / "02_PREGUNTAS_FRECUENTES.md").read_text(encoding="utf8")
+        self.assertIn("alcaldía (ANDA)", faq)
+        self.assertIn("No hay una confirmación pública vigente", faq)
 
 
 if __name__ == "__main__":

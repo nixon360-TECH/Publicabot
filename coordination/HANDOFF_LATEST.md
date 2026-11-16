@@ -1,12 +1,13 @@
-# HANDOFF — 2026-11-15 — N360-029
+# HANDOFF — 2026-11-16 — N360-029
 
-- **Encargo:** personalizar la campaña de 15 días de Santa Isabel para cada agente, cambiando únicamente nombre, teléfono y foto. Primero se produjo un solo piloto; los otros cuatro esperan aprobación de Nixon.
-- **Implementado:** `scripts/codex_artes_15d.py` acepta `--agente <carpeta>`, lee datos y calendario desde MEDIA_ROOT, conserva el copy aprobado, sustituye el cierre y el retrato del día 10, excluye las variantes de pauta y usa el snapshot canónico del repositorio.
-- **Entregado fuera de Git:** 22 láminas de feed 1080×1350 y 15 historias 1080×1920 en `<MEDIA_ROOT>/04_PROJECTS_EDITABLE/agentes/<id>/artes/`. Incluye copys, galería, hojas de revisión, manifiesto con hashes y `qa_report.json`.
-- **Autorevisión:** 37/37 archivos decodifican; dimensiones, nombres, zonas seguras, avisos y hashes aprobados. La estructura de elementos coincide con la campaña original en los 37 diseños. Revisión visual completa y muestras a tamaño final aprobadas. Contraste medido: blanco/navy 14.22:1 y amarillo/navy 9.63:1.
-- **Privacidad:** ningún nombre, teléfono, foto ni salida de agente se añadió al repositorio. El código y las pruebas usan marcadores genéricos.
-- **Estado:** `IN_REVIEW`. No se publicó, no se subió a Drive, no se envió a agentes y no se activó pauta. Siguiente paso: Nixon aprueba o pide ajustes al piloto; solo después se renderizan los otros cuatro.
-- **Evidencia Git:** rama `feature/N360-029-artes-agentes-santa-isabel`; `scripts/codex_artes_15d.py`; `tests/test_agent_art_campaign.py`.
+- **Encargo completado:** tras aprobar el piloto, Nixon autorizó producir los cinco paquetes y crear en Google Drive `Publicidad Digital Remax Eleva`.
+- **Entregado fuera de Git:** cinco paquetes en `<MEDIA_ROOT>/04_PROJECTS_EDITABLE/agentes/<id>/artes/`. Cada uno contiene 22 láminas de feed 1080×1350, 15 historias 1080×1920, 15 copys, galería, manifiesto, calendario y QA. Total: 185 diseños.
+- **Recursos nuevos:** cada paquete incluye `recursos_informacion_general/` con ficha pública, preguntas frecuentes y reglas de uso. `CONFIRMADO_USUARIO` 2026-11-16: “El agua es provista por la alcaldía (ANDA).” Electricidad se mantiene como dato no confirmado y no debe comunicarse.
+- **Drive:** carpeta principal creada y verificada con cinco carpetas personales. Cada una contiene cuatro ZIP descargables, tres documentos de recursos y cuatro archivos de control/calendario. No se registran vínculos ni datos personales en Git.
+- **Autorevisión:** cinco paquetes en `READY_FOR_REVIEW`; 185/185 JPG decodifican, dimensiones, hashes, zonas seguras, avisos y estructura aprobados. Revisión visual de las diez hojas generales y de las piezas de asesor en ambos formatos. Cero errores en `scripts/qa_artes_agentes.py`.
+- **Privacidad:** nombres, teléfonos, retratos, copys personalizados, salidas y vínculos de Drive permanecen fuera del repositorio público.
+- **Estado:** `DONE`. La carga a Drive fue autorizada y ejecutada. No se publicó en redes, no se envió a agentes y no se activó pauta.
+- **Evidencia Git:** rama `feature/N360-029-artes-agentes-santa-isabel`; `scripts/codex_artes_15d.py`; `scripts/qa_artes_agentes.py`; `tests/test_agent_art_campaign.py`.
 
 ---
 

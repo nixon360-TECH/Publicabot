@@ -281,6 +281,85 @@ def caption(post, kit, approved_copy=None):
             +kit["cierre"]["banco_asterisco"]+"\nSujeto a disponibilidad.\n\n"+tags)
 
 
+def create_agent_resources(out, snapshot, agent):
+    """Crea material comercial de consulta sin agregar afirmaciones no verificadas."""
+    if not agent:
+        return
+    facts = snapshot["public_facts"]
+    resources = out / "recursos_informacion_general"
+    resources.mkdir()
+    general = f"""# Lotificación Santa Isabel · información general
+
+## Datos públicos confirmados
+
+- Ubicación: {snapshot['location']}.
+- Precio: {facts['price_text']}.
+- Lotes desde {facts['min_lot_size_varas2']} v².
+- Los terrenos cuentan con escritura.
+- Agua conectada. {facts['water_provider_text']}
+- Financiamiento con Banco Industrial, sujeto a evaluación del banco.
+- Contacto de esta campaña: {agent['nombre']} · {agent['telefono']}.
+
+## Avisos obligatorios
+
+- Sujeto a disponibilidad.
+- *Financiamiento con Banco Industrial sujeto a evaluación del banco.
+
+## Antes de responder o publicar
+
+Revalidar precio y disponibilidad. No comunicar electricidad, monto de reserva, cuotas, tasas, comisiones ni condiciones de negociación sin una confirmación nueva de Nixon.
+"""
+    faq = f"""# Preguntas frecuentes · Santa Isabel
+
+## ¿Dónde está ubicada la lotificación?
+
+En {snapshot['location']}.
+
+## ¿Desde qué precio hay terrenos?
+
+{facts['price_text']}. El precio y la disponibilidad deben revalidarse antes de cada publicación o respuesta.
+
+## ¿Cuál es el tamaño mínimo?
+
+Desde {facts['min_lot_size_varas2']} varas cuadradas (v²).
+
+## ¿Los terrenos tienen escritura?
+
+Sí, cuentan con escritura.
+
+## ¿Hay servicio de agua?
+
+Sí. {facts['water_provider_text']}
+
+## ¿Hay financiamiento?
+
+Hay financiamiento con Banco Industrial, sujeto a evaluación del banco.
+
+## ¿Hay electricidad?
+
+No hay una confirmación pública vigente para comunicar ese dato. Consulte con Nixon antes de responder.
+
+## ¿Cómo se agenda una visita?
+
+Contacte a {agent['nombre']} al {agent['telefono']}.
+
+## Avisos
+
+Sujeto a disponibilidad. *Financiamiento con Banco Industrial sujeto a evaluación del banco.
+"""
+    rules = """# Uso de estos recursos
+
+- Utilice únicamente los artes y copys de este paquete.
+- No cambie precios, medidas, logos, avisos ni condiciones de financiamiento.
+- No prometa servicios o condiciones que no estén en la ficha general.
+- Revalide precio y disponibilidad antes de publicar.
+- Esta carpeta puede recibir material adicional aprobado sin sustituir los originales.
+"""
+    (resources / "01_INFORMACION_GENERAL.md").write_text(general, encoding="utf8")
+    (resources / "02_PREGUNTAS_FRECUENTES.md").write_text(faq, encoding="utf8")
+    (resources / "03_REGLAS_DE_USO.md").write_text(rules, encoding="utf8")
+
+
 def main():
     ap=argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--photos",type=Path,required=True)
@@ -289,6 +368,7 @@ def main():
     ap.add_argument("--brand-assets",type=Path,help="Carpeta del kit azul/amarillo generado por codex_identidad_santa_isabel.py")
     ap.add_argument("--agente",type=Path,help="Carpeta del agente; lee agentes.json, foto_recorte.png y calendario_<id>.md")
     ap.add_argument("--pilot",action="store_true")
+    ap.add_argument("--drive-authorized",action="store_true",help="Registra la autorización de carga del paquete a Google Drive")
     args=ap.parse_args()
     if args.output.exists():
         raise ValueError("Elija una carpeta nueva para conservar las versiones anteriores")
@@ -354,6 +434,7 @@ def main():
     write_json(args.output/"calendario.json",calendar)
     public_contact = agent["telefono"] if agent else snapshot["contact"]
     write_json(args.output/"ficha_publica.json",{"source":snapshot["source"],"public_facts":facts,"contact":public_contact})
+    create_agent_resources(args.output, snapshot, agent)
     manifest={"creado_por":"codex / NBS publicabot CHATGPT","agente_id":agent["id"] if agent else None,
               "agente_nombre":agent["nombre"] if agent else "Nixon Hernández","agente_telefono":public_contact,
               "fecha_hora":datetime.now(timezone(timedelta(hours=-6))).isoformat(),
@@ -368,7 +449,7 @@ def main():
                   "imagery":"Solo se usan fotos reales aprobadas y el recorte entregado por el agente."
               },
               "safe_zones_px":{"4x5":{"top":120,"bottom":160},"9x16":{"top":250,"bottom":350}},
-              "outputs":exports,"publish_authorized":False,"drive_upload_authorized":False,"ad_spend_authorized":False}
+              "outputs":exports,"publish_authorized":False,"drive_upload_authorized":args.drive_authorized,"ad_spend_authorized":False}
     write_json(args.output/"manifest.json",manifest)
     unchanged=all(sha(path)==digest for path,digest in artist.used.items())
     assert unchanged, "Un archivo de entrada cambió durante la producción"
@@ -378,11 +459,12 @@ def main():
     write_json(args.output/"qa_report.json",{"status":"DRAFT_FOR_USER_REVIEW","facts_match_snapshot":True,
               "contact_matches_agent":bool(agent),"dimensions_verified":True,"source_unchanged":unchanged,
               "safe_text_bounds_verified":True,"elements_no_overlap_verified":True,"visual_review":"PENDING",
-              "publication_approved":False,"drive_upload_approved":False,"designs":len(exports)})
+              "publication_approved":False,"drive_upload_approved":args.drive_authorized,"designs":len(exports)})
     period_text=f"{campaign_start.strftime('%d/%m/%Y')} al {(campaign_start+timedelta(days=14)).strftime('%d/%m/%Y')}"
     owner_text=agent["nombre"] if agent else "Nixon Hernández"
     paid_line="" if agent else "- La carpeta de pauta contiene tres alternativas; no son campañas activadas.\n"
-    (args.output/"LEEME.md").write_text(f"# Santa Isabel · artes de 15 días · {owner_text}\n\nPaquete local del {period_text}. Fechas solo en el calendario.\n\n- Feed: JPG de 1080×1350. Historias: JPG de 1080×1920.\n- Carruseles: mantener el orden 01, 02, 03, 04 de cada día.\n{paid_line}- Copys para Instagram y Facebook en la carpeta copys.\n- Las fotos provienen de la carpeta de fotos limpias indicada por Nixon. Se conservan sus ediciones previas.\n- Los datos corresponden al snapshot verificado por el usuario el 12 de noviembre. Revalidar precio y disponibilidad antes de publicar cada pieza.\n- No se agregó voz, imagen sintética ni servicios no verificados.\n- Editable: plan_editable.json + script del repositorio; fuentes, colores y logos del kit.\n\nEstado: borradores pendientes de selección y aprobación de Nixon. No hay publicación, carga a Drive ni gasto activados.\n",encoding="utf8")
+    drive_line="Carga a Google Drive autorizada por Nixon el 16/11/2026. " if args.drive_authorized else "Carga a Drive no autorizada. "
+    (args.output/"LEEME.md").write_text(f"# Santa Isabel · artes de 15 días · {owner_text}\n\nPaquete local del {period_text}. Fechas solo en el calendario.\n\n- Feed: JPG de 1080×1350. Historias: JPG de 1080×1920.\n- Carruseles: mantener el orden 01, 02, 03, 04 de cada día.\n{paid_line}- Copys para Instagram y Facebook en la carpeta copys.\n- Recursos e información general en su carpeta, incluidas preguntas frecuentes.\n- Las fotos provienen de la carpeta de fotos limpias indicada por Nixon. Se conservan sus ediciones previas.\n- Los datos corresponden al snapshot verificado por el usuario, actualizado el 16 de noviembre. Revalidar precio y disponibilidad antes de publicar cada pieza.\n- No se agregó voz, imagen sintética ni servicios no verificados.\n- Editable: plan_editable.json + script del repositorio; fuentes, colores y logos del kit.\n\nEstado: artes aprobados para entrega. {drive_line}No se autorizó publicar en redes ni activar pauta.\n",encoding="utf8")
     create_readme_html(args.output)
     create_gallery(args.output,calendar,exports,agent)
     create_sheets(args.output,exports)
