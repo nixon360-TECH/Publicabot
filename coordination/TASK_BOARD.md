@@ -2,6 +2,7 @@
 
 | ID | P | Tarea | Owner | Estado |
 |---|---|---|---|---|
+| N360-029 | P0 | Artes personalizados Santa Isabel por agente y entrega en Drive | codex / rama `feature/N360-029-artes-agentes-santa-isabel` | DONE (5 paquetes; 185 diseños; Drive simplificado a fotos, historias y textos individuales; QA aprobado; PII fuera de Git) |
 | N360-028 | P0 | Restaurar el logo original verde en sitio y perfil; mantener artes y paleta azul/amarillo | codex / NBS publicabot CHATGPT | DONE (sitio v20 publicado y verificado; logo verde original; interfaz azul/amarilla; 41 artes sin cambios) |
 | N360-027 | P0 | Unificar Santa Isabel en azul y amarillo: identidad, campaña y sitio existente | codex / NBS publicabot CHATGPT | DONE (sitio v19 publicado y verificado; 41 artes e identidad entregados; rama `codex/N360-027-santa-isabel-paleta`) |
 | N360-000 | P0 | Base del repo (contexto, estilo, reglas, skills) | claude | IN_REVIEW (PR) |

@@ -1,4 +1,17 @@
-# HANDOFF — 2026-11-13 — N360-028
+# HANDOFF — 2026-11-16 — N360-029
+
+- **Encargo completado:** tras aprobar el piloto, Nixon autorizó producir los cinco paquetes y crear en Google Drive `Publicidad Digital Remax Eleva`.
+- **Entregado fuera de Git:** cinco paquetes en `<MEDIA_ROOT>/04_PROJECTS_EDITABLE/agentes/<id>/artes/`. Cada uno contiene 22 láminas de feed 1080×1350, 15 historias 1080×1920, 15 copys, galería, manifiesto, calendario y QA. Total: 185 diseños.
+- **Recursos nuevos:** cada paquete incluye `recursos_informacion_general/` con ficha pública, preguntas frecuentes y reglas de uso. `CONFIRMADO_USUARIO` 2026-11-16: “El agua es provista por la alcaldía (ANDA).” Electricidad se mantiene como dato no confirmado y no debe comunicarse.
+- **Drive:** carpeta principal creada y verificada con cinco carpetas personales. A solicitud de Nixon, la vista de cada agente se simplificó a `01 FOTOS PARA PUBLICAR` (22 JPG), `02 HISTORIAS` (15 JPG) y `03 TEXTOS PARA COPIAR Y PEGAR` (15 TXT + una instrucción breve). Los nombres comparten el número D01–D15; carruseles conservan orden 01–04. No hay ZIP, JSON ni archivos técnicos en la vista de los agentes. Todo el respaldo técnico se movió a `00 ARCHIVO INTERNO - NIXON` sin borrar datos.
+- **Autorevisión:** cinco paquetes en `READY_FOR_REVIEW`; 185/185 JPG decodifican, dimensiones, hashes, zonas seguras, avisos y estructura aprobados. Revisión visual de las diez hojas generales y de las piezas de asesor en ambos formatos. Cero errores en `scripts/qa_artes_agentes.py`.
+- **Privacidad:** nombres, teléfonos, retratos, copys personalizados, salidas y vínculos de Drive permanecen fuera del repositorio público.
+- **Estado:** `DONE`. La carga a Drive fue autorizada y ejecutada. No se publicó en redes, no se envió a agentes y no se activó pauta.
+- **Evidencia Git:** rama `feature/N360-029-artes-agentes-santa-isabel`; `scripts/codex_artes_15d.py`; `scripts/qa_artes_agentes.py`; `tests/test_agent_art_campaign.py`.
+
+---
+
+## Handoff anterior — 2026-11-13 — N360-028
 
 - **Corrección de Nixon:** conservar el logo original de Santa Isabel y su tono verde. Los artes ya aprobados quedan como están porque el logo transparente no contiene fondo de color.
 - **Hecho localmente:** encabezado, pie y favicon del sitio restaurados al archivo aprobado `santa-isabel-logo-aprobado.jpg`; interfaz, mapa y catálogo siguen navy/amarillo. Perfil verde original copiado a `05_RENDERS_DRAFT/N360-20261112-0001/codex_identidad_logo_original_v02/` relativa a `E:\NIXON360_CONTENTOPS`.

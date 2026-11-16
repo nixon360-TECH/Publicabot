@@ -35,6 +35,18 @@ python scripts/codex_artes_15d.py --photos RUTA_FOTOS_LIMPIAS --project RUTA_PRO
 debe ser nueva. Nunca se sobrescriben originales. Los PNG/JPG, manifests con rutas
 locales y ZIP permanecen en el disco de medios, fuera de Git.
 
+### Campaña personalizada por agente
+
+```powershell
+python scripts/codex_artes_15d.py --photos RUTA_FOTOS_LIMPIAS --project RUTA_PROYECTO_N360 --brand-assets RUTA_IDENTIDAD --agente RUTA_AGENTE --output RUTA_AGENTE\artes
+```
+
+`RUTA_AGENTE` contiene `foto_original.jpeg`, `foto_recorte.png` y
+`calendario_<id>.md`; `agentes.json` permanece en su carpeta superior. Este modo
+produce 22 láminas de feed y 15 historias, excluye pauta y toma los copys del
+calendario sin reescribirlos. Los datos personales y renders permanecen en
+MEDIA_ROOT y nunca se agregan al repositorio.
+
 Se comprueba el snapshot antes de producir; se miden los textos y logos dentro de
 las zonas seguras del kit; se revisan dimensiones y hashes de entrada. La selección
 y aprobación final pertenecen a Nixon. Las fechas aparecen en calendario y archivos,
