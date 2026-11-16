@@ -108,7 +108,7 @@ def split_display_name(name):
 
 
 class Artist:
-    def __init__(self, source, project, kit_path, brand_assets=None, agent=None):
+    def __init__(self, source, project, kit_path, brand_assets=None, agent=None, style="campaign"):
         self.source, self.project = source, project
         self.kit = json.loads(kit_path.read_text(encoding="utf8"))
         self.palette = json.loads((REPO/"brands/santa-isabel/palette.json").read_text(encoding="utf8"))
@@ -116,6 +116,7 @@ class Artist:
         self.cream = self.palette["colors"]["white"]
         self.brand_assets = brand_assets
         self.agent = agent
+        self.style = style
         self.used = {}
         self.bounds = []
         self.fonts = {"impact": "impact.ttf", "serif": "georgiai.ttf", "body": "segoeui.ttf", "bold": "seguibl.ttf"}
@@ -207,7 +208,86 @@ class Artist:
         self.text(image,"*Financiamiento con Banco Industrial sujeto a evaluación del banco.",540,legal_y,23,max_width=950,shadow=False)
         self.text(image,"Sujeto a disponibilidad.",540,legal_y+29,23,shadow=False)
 
+    def minimal_footer(self, image, tall):
+        """Cierre reducido: contacto una vez, logos oficiales y avisos obligatorios."""
+        phone = self.agent["telefono"] if self.agent else self.kit["cierre"]["telefono"]["texto"]
+        name = self.agent["nombre"] if self.agent else "Nixon Hernández"
+        height = image.height
+        bar_top = 1215 if tall else 850
+        ImageDraw.Draw(image).rectangle((0, bar_top, image.width, height), fill=NAVY + (246,))
+        cta_y, phone_y, name_y = (1255, 1305, 1410) if tall else (875, 915, 995)
+        self.text(image,"Agende su visita",540,cta_y,31 if tall else 27,font="bold",shadow=False)
+        self.text(image,phone,540,phone_y,82 if tall else 70,font="impact",color=self.yellow,shadow=False)
+        if not (self.agent and self.agent.get("office")):
+            self.text(image,name,540,name_y,27 if tall else 24,font="serif",max_width=700,shadow=False)
+        office = self.agent and self.agent.get("office")
+        logo_y = (1400 if tall else 1008) if office else (1445 if tall else 1035)
+        remax_logo = self.agent.get("office_logo") if office else self.kit["logos"]["remax_abajo_centro"]["archivo"]
+        self.logo(image,remax_logo,215 if office else 205,logo_y,(220 if tall else 200) if office else (250 if tall else 230))
+        self.logo(image,self.project/"assets/logo_bi_blanco.png",640,(1445 if tall else 1040) if office else logo_y+5,160 if tall else 150)
+        legal_y = 1520 if tall else 1122
+        self.text(image,"*Financiamiento con Banco Industrial sujeto a evaluación del banco.",540,legal_y,20 if tall else 18,max_width=920,shadow=False,min_size=14)
+        self.text(image,"Sujeto a disponibilidad.",540,legal_y+25,20 if tall else 18,shadow=False,min_size=14)
+
+    def make_minimal(self, post, fmt):
+        size = FORMATS[fmt]
+        tall = fmt == "9x16"
+        limits = self.kit["plataformas"]["master_9x16" if tall else "post_4x5"]["zona_segura_px"]
+        self.safe_top, self.safe_bottom = limits["arriba"], size[1]-limits["abajo"]
+        self.safe_left, self.safe_right = limits["izquierda"], size[0]-limits["derecha"]
+        self.bounds = []
+        if self.agent and self.agent.get("office") and post.get("layout") == "advisor":
+            post = dict(post)
+            post["title"] = ["AGENDE", "SU VISITA"]
+            post["support"] = "Atención de RE/MAX Eleva"
+        elif self.agent and post.get("layout") == "advisor":
+            post = dict(post)
+            post["title"] = split_display_name(self.agent["nombre"])
+        anchor = (0.58,0.5) if post["photos"][0] == "calles-desde-arriba" else (0.72,0.5)
+        image = self.photo(post["photos"][0], size, anchor)
+        stops = ([(0,160),(420,120),(760,30),(1120,25),(1215,210),(1920,245)] if tall
+                 else [(0,155),(260,115),(520,35),(790,25),(850,220),(1350,245)])
+        image = self.tint(image, stops)
+        logo_path = ((self.brand_assets/"logo_si_horizontal_claro.png") if self.brand_assets
+                     else self.project/"assets/logo_si_horizontal.png")
+        self.logo(image,logo_path,330,270 if tall else 145,420)
+        self.text(image,"Comacarán, San Miguel",540,400 if tall else 260,26 if tall else 23,color=self.cream,shadow=False)
+        lines = post["title"]
+        top = 500 if tall else 340
+        line_gap = 114 if tall else 88
+        max_size = (118 if tall else 94) if len(lines) == 1 else (96 if tall else 76)
+        for index, line in enumerate(lines):
+            color = self.yellow if any(token in line for token in ("US$","v²","VISITA")) else WHITE
+            self.text(image,line,540,top+index*line_gap,max_size,font="impact",color=color,min_size=50,shadow=True)
+        support_y = top + (line_gap * len(lines)) + (12 if tall else 4)
+        self.text(image,post["support"],540,support_y,29 if tall else 24,font="bold",color=self.cream,max_width=880,shadow=True)
+        if post.get("layout") == "advisor" and not (self.agent and self.agent.get("office")):
+            portrait_path = self.agent["portrait_path"] if self.agent else self.project/"assets/nixon_recorte.png"
+            portrait = self.asset(portrait_path)
+            portrait = portrait.crop(portrait.getbbox()) if self.agent else portrait.crop((100,173,960,1220))
+            portrait_height = 400 if tall else 240
+            portrait = portrait.resize((round(portrait.width*portrait_height/portrait.height),portrait_height),Image.Resampling.LANCZOS)
+            alpha = np.asarray(portrait.getchannel("A"),dtype=np.float32)
+            fade = np.minimum(1,(portrait_height-1-np.arange(portrait_height))/35)[:,None]
+            portrait.putalpha(Image.fromarray((alpha*fade).astype(np.uint8)))
+            px = (1080-portrait.width)//2
+            py = 820 if tall else 600
+            portrait_box = (px,py,px+portrait.width,py+portrait_height)
+            if px < self.safe_left or px + portrait.width > self.safe_right:
+                raise ValueError(f"Retrato fuera de zona segura: {portrait_box}")
+            self.bounds.append({"type":"portrait","text":self.agent["nombre"] if self.agent else "Nixon","bbox":portrait_box})
+            image.alpha_composite(portrait,(px,py))
+        self.minimal_footer(image,tall)
+        for index, first in enumerate(self.bounds):
+            for second in self.bounds[index+1:]:
+                x0,y0,x1,y1=first["bbox"]; u0,v0,u1,v1=second["bbox"]
+                if min(x1,u1)>max(x0,u0) and min(y1,v1)>max(y0,v0):
+                    raise ValueError(f"Elementos superpuestos: {first['text']} / {second['text']}")
+        return image.convert("RGB"), list(self.bounds)
+
     def make(self, post, fmt):
+        if self.style == "minimal":
+            return self.make_minimal(post, fmt)
         size = FORMATS[fmt]
         tall = fmt=="9x16"
         limits = self.kit["plataformas"]["master_9x16" if tall else "post_4x5"]["zona_segura_px"]
@@ -278,6 +358,13 @@ def caption(post, kit, approved_copy=None):
     tags="#SantaIsabel #Comacaran #SanMiguel #ElSalvador #Terrenos #VentaDeTerrenos #Lotes #BienesRaices #NixonHernandez #REMAX"
     return (post["copy"]+"\n\n• Terrenos desde US$24,500\n• Desde 286 v²\n• Con escritura\n• Agua conectada\n\n"
             +kit["cierre"]["frase"]+".\n+503 7956 4399\nhttps://wa.me/50379564399\n\n"
+            +kit["cierre"]["banco_asterisco"]+"\nSujeto a disponibilidad.\n\n"+tags)
+
+
+def office_caption(post, kit, contact, wa):
+    tags="#SantaIsabel #Comacaran #SanMiguel #ElSalvador #Terrenos #VentaDeTerrenos #Lotes #BienesRaices #REMAXEleva"
+    return (post["copy"]+"\n\n• Terrenos desde US$24,500\n• Desde 286 v²\n• Con escritura\n• Agua conectada\n\n"
+            +kit["cierre"]["frase"]+f".\n{contact}\nhttps://wa.me/{wa}\n\n"
             +kit["cierre"]["banco_asterisco"]+"\nSujeto a disponibilidad.\n\n"+tags)
 
 
@@ -369,6 +456,9 @@ def main():
     ap.add_argument("--agente",type=Path,help="Carpeta del agente; lee agentes.json, foto_recorte.png y calendario_<id>.md")
     ap.add_argument("--pilot",action="store_true")
     ap.add_argument("--drive-authorized",action="store_true",help="Registra la autorización de carga del paquete a Google Drive")
+    ap.add_argument("--style",choices=("campaign","minimal"),default="campaign")
+    ap.add_argument("--office-contact",help="Contacto público de RE/MAX Eleva; crea un paquete sin nombre ni retrato")
+    ap.add_argument("--office-logo",type=Path,help="Logo oficial de RE/MAX Eleva para el paquete de oficina")
     args=ap.parse_args()
     if args.output.exists():
         raise ValueError("Elija una carpeta nueva para conservar las versiones anteriores")
@@ -383,12 +473,24 @@ def main():
     facts=snapshot["public_facts"]
     assert snapshot["status"].startswith("VERIFIED")
     assert (facts["price_from_usd"],facts["min_lot_size_varas2"],facts["water_connected"],facts["with_deed"])==(24500,286,True,True)
-    agent=load_agent(args.agente) if args.agente else None
+    if args.agente and args.office_contact:
+        raise ValueError("Use --agente o --office-contact, no ambos")
+    if args.office_contact:
+        if not args.office_logo or not args.office_logo.is_file():
+            raise ValueError("El paquete de oficina requiere --office-logo válido")
+        office_wa=re.sub(r"\D","",args.office_contact)
+        if len(office_wa) != 11 or not office_wa.startswith("503"):
+            raise ValueError("Contacto de oficina inválido")
+        agent={"id":"Oficina_Eleva","nombre":"RE/MAX Eleva","telefono":args.office_contact,
+               "wa":office_wa,"office":True,"office_logo":args.office_logo,
+               "start_date":date(2026,11,16),"copies":{},"directory":args.output.parent}
+    else:
+        agent=load_agent(args.agente) if args.agente else None
     if not agent:
         assert snapshot["contact"]=="+503 7956 4399"
-    artist=Artist(args.photos,args.project,kit_path,args.brand_assets,agent)
+    artist=Artist(args.photos,args.project,kit_path,args.brand_assets,agent,args.style)
     artist.used[snapshot_path] = sha(snapshot_path)
-    if agent:
+    if agent and not agent.get("office"):
         for path in (agent["records_path"], agent["original_path"], agent["calendar_path"]):
             artist.used[path] = sha(path)
     args.output.mkdir(parents=True)
@@ -405,7 +507,8 @@ def main():
         campaign_start = agent["start_date"] if agent else date.fromisoformat(plan["start_date"])
         dt=campaign_start+timedelta(days=day-1)
         prefix=(f"{agent['id']}_" if agent else "")+f"D{day:02d}_{post['id']}"
-        text=caption(post,artist.kit,agent["copies"][day] if agent else None)
+        text=(office_caption(post,artist.kit,agent["telefono"],agent["wa"])
+              if agent and agent.get("office") else caption(post,artist.kit,agent["copies"][day] if agent else None))
         (args.output/"copys"/f"{prefix}.md").write_text(f"# {dt.isoformat()} · {post['angle']}\n\n## Instagram\n\n{text}\n\n## Facebook\n\n{text}\n",encoding="utf8")
         calendar.append({"day":day,"date":dt.isoformat(),"id":prefix,"angle":post["angle"],"caption":text,"carousel":len(post.get("slides",[]))+1})
         pages=[post]+[dict(slide,layout="hero",id=post["id"]) for slide in post.get("slides",[])]
@@ -413,7 +516,11 @@ def main():
             for fmt in (FORMATS if index==1 else ["4x5"]):
                 img,bounds=artist.make(page,fmt)
                 folder="feed_4x5" if fmt=="4x5" else "historias_9x16"
-                name=f"{prefix}_{index:02d}_{fmt}.jpg"
+                if args.style == "minimal" and agent:
+                    label=(f"CARRUSEL_{index:02d}" if len(pages)>1 else "PUBLICAR_SOLO") if fmt=="4x5" else "HISTORIA"
+                    name=f"{agent['id']}_D{day:02d}_{label}_{fmt}.jpg"
+                else:
+                    name=f"{prefix}_{index:02d}_{fmt}.jpg"
                 relative=f"{folder}/{name}"
                 img.save(args.output/relative,quality=96,subsampling=0)
                 thumb=ImageOps.contain(img,(320,420))

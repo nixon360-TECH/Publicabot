@@ -83,11 +83,12 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--agents-root", type=Path, required=True)
     parser.add_argument("--agent", action="append", required=True)
+    parser.add_argument("--package-name", default="artes")
     parser.add_argument("--visual-reviewed", action="store_true")
     args = parser.parse_args()
     failed = False
     for agent_id in args.agent:
-        report = validate(args.agents_root / agent_id / "artes", args.visual_reviewed)
+        report = validate(args.agents_root / agent_id / args.package_name, args.visual_reviewed)
         print(agent_id, report["status"], len(report["errors"]), flush=True)
         failed = failed or bool(report["errors"])
     raise SystemExit(1 if failed else 0)
