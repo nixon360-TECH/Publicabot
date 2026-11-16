@@ -70,6 +70,12 @@ class AgentArtCampaignTests(unittest.TestCase):
         artist.make_minimal = lambda post, fmt: (post, fmt)
         self.assertEqual(artist.make({"id": "sample"}, "4x5"), ({"id": "sample"}, "4x5"))
 
+    def test_photo_style_routes_to_photo_first_renderer(self):
+        artist = object.__new__(Artist)
+        artist.style = "photo"
+        artist.make_photo_first = lambda post, fmt: (post, fmt)
+        self.assertEqual(artist.make({"id": "sample"}, "4x5"), ({"id": "sample"}, "4x5"))
+
     def test_office_caption_uses_office_contact(self):
         post = {"copy": "Texto"}
         kit = {"cierre": {"frase": "Agende", "banco_asterisco": "Aviso"}}
