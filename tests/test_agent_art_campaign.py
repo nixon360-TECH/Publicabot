@@ -2,7 +2,7 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from scripts.codex_artes_15d import caption, create_agent_resources, create_gallery, create_readme_html, parse_agent_calendar, split_display_name
+from scripts.codex_artes_15d import Artist, caption, create_agent_resources, create_gallery, create_readme_html, office_caption, parse_agent_calendar, split_display_name
 
 
 class AgentArtCampaignTests(unittest.TestCase):
@@ -63,6 +63,19 @@ class AgentArtCampaignTests(unittest.TestCase):
             faq = (output / "recursos_informacion_general" / "02_PREGUNTAS_FRECUENTES.md").read_text(encoding="utf8")
         self.assertIn("alcaldía (ANDA)", faq)
         self.assertIn("No hay una confirmación pública vigente", faq)
+
+    def test_minimal_style_routes_to_minimal_renderer(self):
+        artist = object.__new__(Artist)
+        artist.style = "minimal"
+        artist.make_minimal = lambda post, fmt: (post, fmt)
+        self.assertEqual(artist.make({"id": "sample"}, "4x5"), ({"id": "sample"}, "4x5"))
+
+    def test_office_caption_uses_office_contact(self):
+        post = {"copy": "Texto"}
+        kit = {"cierre": {"frase": "Agende", "banco_asterisco": "Aviso"}}
+        result = office_caption(post, kit, "+503 0000 0000", "50300000000")
+        self.assertIn("+503 0000 0000", result)
+        self.assertIn("wa.me/50300000000", result)
 
 
 if __name__ == "__main__":

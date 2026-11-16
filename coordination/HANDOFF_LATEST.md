@@ -1,4 +1,17 @@
-# HANDOFF — 2026-11-16 — N360-029
+# HANDOFF — 2026-11-16 — N360-030
+
+- **Producción terminada fuera de Git:** segunda versión minimalista para cinco agentes y una versión institucional de oficina. Cada paquete contiene 22 publicaciones 4:5 y 15 historias 9:16; total: 222 diseños. Se conservó la versión anterior como historial.
+- **Dirección visual:** fotografía real dominante, menos texto, un solo mensaje principal, cierre compacto y paleta azul/amarilla. Los logos oficiales no se recolorearon. La versión de oficina no contiene nombre ni retrato de agente; usa únicamente la identidad y el contacto público verificado de RE/MAX Eleva.
+- **Uso simplificado:** nombres visibles `PUBLICAR_SOLO`, `CARRUSEL_01…` e `HISTORIA`. Cada paquete incluye 15 textos `D01_TEXTO.txt`–`D15_TEXTO.txt` y `00 EMPIECE AQUI.txt`. Solo D02, D06 y D11 son carruseles. No se prepararon ZIP, JSON ni archivos técnicos para la vista de los asesores.
+- **Autorevisión:** los seis paquetes quedaron `READY_FOR_REVIEW`; 222/222 JPG aprobados en dimensiones, decodificación, zonas seguras, avisos, estructura y revisión visual de muestras críticas. Ocho pruebas unitarias aprobadas.
+- **Drive:** estructura visible creada para los seis destinatarios. Dos paquetes personales están completos; un tercero tiene 49/53 archivos; los tres restantes conservan sus carpetas creadas y están pendientes de carga. El conector devolvió `upload_protection_limit_exceeded` y pidió reintentar después de dos horas. No se eliminó ni se duplicó la entrega anterior.
+- **Privacidad:** nombres, teléfonos, retratos, copys personalizados, salidas y vínculos de Drive permanecen fuera del repositorio público.
+- **Estado:** `LOCAL_DONE / DRIVE_PAUSED`. No se publicó en redes, no se envió a agentes y no se activó pauta.
+- **Evidencia Git:** rama `feature/N360-030-artes-minimalistas-agentes`; `scripts/codex_artes_15d.py`; `scripts/qa_artes_agentes.py`; `tests/test_agent_art_campaign.py`.
+
+---
+
+## Handoff anterior — 2026-11-16 — N360-029
 
 - **Encargo completado:** tras aprobar el piloto, Nixon autorizó producir los cinco paquetes y crear en Google Drive `Publicidad Digital Remax Eleva`.
 - **Entregado fuera de Git:** cinco paquetes en `<MEDIA_ROOT>/04_PROJECTS_EDITABLE/agentes/<id>/artes/`. Cada uno contiene 22 láminas de feed 1080×1350, 15 historias 1080×1920, 15 copys, galería, manifiesto, calendario y QA. Total: 185 diseños.
