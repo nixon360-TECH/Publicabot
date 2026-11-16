@@ -19,7 +19,7 @@ def sha256(path):
     return digest.hexdigest()
 
 
-def validate(package, visual_reviewed=False):
+def validate(package, visual_reviewed=False, require_drive_authorization=False):
     manifest = json.loads((package / "manifest.json").read_text(encoding="utf8"))
     outputs = manifest["outputs"]
     errors = []
@@ -63,7 +63,7 @@ def validate(package, visual_reviewed=False):
             errors.append("respuesta de agua ausente")
         if "No hay una confirmación pública vigente" not in faq:
             errors.append("electricidad no está bloqueada")
-    if not manifest.get("drive_upload_authorized"):
+    if require_drive_authorization and not manifest.get("drive_upload_authorized"):
         errors.append("autorización de Drive ausente")
     report = json.loads((package / "qa_report.json").read_text(encoding="utf8"))
     report.update(
@@ -85,10 +85,19 @@ def main():
     parser.add_argument("--agent", action="append", required=True)
     parser.add_argument("--package-name", default="artes")
     parser.add_argument("--visual-reviewed", action="store_true")
+    parser.add_argument(
+        "--require-drive-authorization",
+        action="store_true",
+        help="Bloquea la validación si el paquete aún no fue autorizado para subir a Drive.",
+    )
     args = parser.parse_args()
     failed = False
     for agent_id in args.agent:
-        report = validate(args.agents_root / agent_id / args.package_name, args.visual_reviewed)
+        report = validate(
+            args.agents_root / agent_id / args.package_name,
+            args.visual_reviewed,
+            args.require_drive_authorization,
+        )
         print(agent_id, report["status"], len(report["errors"]), flush=True)
         failed = failed or bool(report["errors"])
     raise SystemExit(1 if failed else 0)

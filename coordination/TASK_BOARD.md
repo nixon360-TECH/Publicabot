@@ -2,6 +2,7 @@
 
 | ID | P | Tarea | Owner | Estado |
 |---|---|---|---|---|
+| N360-031 | P0 | Regenerar todos los artes Santa Isabel con fotografía dominante y azul translúcido; auditar fotos e IA sin costo | codex / rama `feature/N360-031-artes-foto-dominante` | READY_FOR_REVIEW (222 diseños locales aprobados; seis paquetes v03; Drive pendiente de aprobación específica) |
 | N360-030 | P0 | Segunda versión minimalista de artes por agente y entrega guiada en Drive | codex / rama `feature/N360-030-artes-minimalistas-agentes` | LOCAL_DONE / DRIVE_PAUSED (222 diseños y QA listos; un paquete completo y dos casi completos; límite temporal del conector durante la carga restante) |
 | N360-029 | P0 | Artes personalizados Santa Isabel por agente y entrega en Drive | codex / rama `feature/N360-029-artes-agentes-santa-isabel` | DONE (5 paquetes; 185 diseños; Drive simplificado a fotos, historias y textos individuales; QA aprobado; PII fuera de Git) |
 | N360-028 | P0 | Restaurar el logo original verde en sitio y perfil; mantener artes y paleta azul/amarillo | codex / NBS publicabot CHATGPT | DONE (sitio v20 publicado y verificado; logo verde original; interfaz azul/amarilla; 41 artes sin cambios) |

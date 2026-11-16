@@ -12,7 +12,7 @@ import shutil
 import zipfile
 
 import numpy as np
-from PIL import Image, ImageDraw, ImageFont, ImageOps, ImageFilter
+from PIL import Image, ImageDraw, ImageFont, ImageOps, ImageFilter, ImageEnhance
 
 REPO = Path(__file__).resolve().parents[1]
 FONT = Path("C:/Windows/Fonts")
@@ -142,6 +142,12 @@ class Artist:
         overlay = Image.new("RGBA", image.size, NAVY + (0,))
         overlay.putalpha(Image.fromarray(np.broadcast_to(a[:, None], (height, width)).copy()))
         return Image.alpha_composite(image, overlay)
+
+    def translucent_panel(self, image, box, alpha=145, radius=28):
+        """Añade contraste localizado sin cubrir la fotografía completa."""
+        layer = Image.new("RGBA", image.size, (0, 0, 0, 0))
+        ImageDraw.Draw(layer).rounded_rectangle(box, radius=radius, fill=NAVY + (alpha,))
+        image.alpha_composite(layer)
 
     def text(self, image, text, x, y, size, font="body", color=WHITE, max_width=960,
              anchor="mt", shadow=True, min_size=20):
@@ -285,7 +291,102 @@ class Artist:
                     raise ValueError(f"Elementos superpuestos: {first['text']} / {second['text']}")
         return image.convert("RGB"), list(self.bounds)
 
+    def photo_footer(self, image, tall):
+        """Cierre translúcido: la fotografía continúa visible hasta el borde."""
+        phone = self.agent["telefono"] if self.agent else self.kit["cierre"]["telefono"]["texto"]
+        name = self.agent["nombre"] if self.agent else "Nixon Hernández"
+        height = image.height
+        start = 1060 if tall else 760
+        alpha = np.interp(np.arange(height), [0, start, height], [0, 0, 218]).astype(np.uint8)
+        overlay = Image.new("RGBA", image.size, NAVY + (0,))
+        overlay.putalpha(Image.fromarray(np.broadcast_to(alpha[:, None], (height, image.width)).copy()))
+        image.alpha_composite(overlay)
+        cta_y, phone_y, name_y = (1255, 1305, 1400) if tall else (865, 905, 995)
+        self.text(image, "Agende su visita", 540, cta_y, 30 if tall else 26, font="bold")
+        self.text(image, phone, 540, phone_y, 78 if tall else 65, font="impact", color=self.yellow)
+        office = self.agent and self.agent.get("office")
+        if not office:
+            self.text(image, name, 540, name_y, 25 if tall else 22, font="serif", max_width=680)
+        remax_logo = self.agent.get("office_logo") if office else self.kit["logos"]["remax_abajo_centro"]["archivo"]
+        logo_y = 1440 if tall else 1040
+        self.logo(image, remax_logo, 205, logo_y, 235 if tall else 210)
+        self.logo(image, self.project/"assets/logo_bi_blanco.png", 650, logo_y+4, 150 if tall else 135)
+        legal_y = 1528 if tall else 1125
+        self.text(image, "*Financiamiento con Banco Industrial sujeto a evaluación del banco.",
+                  540, legal_y, 19 if tall else 17, max_width=920, shadow=True, min_size=14)
+        self.text(image, "Sujeto a disponibilidad.", 540, legal_y+24, 19 if tall else 17,
+                  shadow=True, min_size=14)
+
+    def make_photo_first(self, post, fmt):
+        """Tercera dirección: foto dominante y navy solo como vidrio translúcido."""
+        size = FORMATS[fmt]
+        tall = fmt == "9x16"
+        limits = self.kit["plataformas"]["master_9x16" if tall else "post_4x5"]["zona_segura_px"]
+        self.safe_top, self.safe_bottom = limits["arriba"], size[1]-limits["abajo"]
+        self.safe_left, self.safe_right = limits["izquierda"], size[0]-limits["derecha"]
+        self.bounds = []
+        if self.agent and self.agent.get("office") and post.get("layout") == "advisor":
+            post = dict(post)
+            post["title"] = ["AGENDE", "SU VISITA"]
+            post["support"] = "Atención de RE/MAX Eleva"
+        elif self.agent and post.get("layout") == "advisor":
+            post = dict(post)
+            post["title"] = split_display_name(self.agent["nombre"])
+        anchor = (0.58, 0.5) if post["photos"][0] == "calles-desde-arriba" else (0.72, 0.5)
+        image = self.photo(post["photos"][0], size, anchor)
+        image = ImageEnhance.Brightness(image).enhance(1.04)
+        image = ImageEnhance.Contrast(image).enhance(1.035)
+        image = ImageEnhance.Color(image).enhance(1.02)
+        top_alpha = np.interp(np.arange(size[1]), [0, 360 if tall else 280, size[1]], [118, 0, 0]).astype(np.uint8)
+        top_overlay = Image.new("RGBA", size, NAVY + (0,))
+        top_overlay.putalpha(Image.fromarray(np.broadcast_to(top_alpha[:, None], (size[1], size[0])).copy()))
+        image.alpha_composite(top_overlay)
+        logo_path = ((self.brand_assets/"logo_si_horizontal_claro.png") if self.brand_assets
+                     else self.project/"assets/logo_si_horizontal.png")
+        self.logo(image, logo_path, 330, 275 if tall else 145, 420)
+        self.text(image, "Comacarán, San Miguel", 540, 402 if tall else 260,
+                  25 if tall else 22, color=self.cream)
+        panel_top = 485 if tall else 325
+        lines = post["title"]
+        line_gap = 108 if tall else 82
+        panel_height = (line_gap * len(lines)) + (130 if tall else 104)
+        self.translucent_panel(image, (62, panel_top-28, 1018, panel_top+panel_height),
+                               alpha=142 if tall else 135, radius=30)
+        max_size = (112 if tall else 88) if len(lines) == 1 else (92 if tall else 72)
+        for index, line in enumerate(lines):
+            color = self.yellow if any(token in line for token in ("US$", "v²", "VISITA")) else WHITE
+            self.text(image, line, 540, panel_top+index*line_gap, max_size,
+                      font="impact", color=color, min_size=48)
+        support_y = panel_top + line_gap*len(lines) + (28 if tall else 30)
+        self.text(image, post["support"], 540, support_y, 28 if tall else 23,
+                  font="bold", color=self.cream, max_width=880)
+        if post.get("layout") == "advisor" and not (self.agent and self.agent.get("office")):
+            portrait_path = self.agent["portrait_path"] if self.agent else self.project/"assets/nixon_recorte.png"
+            portrait = self.asset(portrait_path)
+            portrait = portrait.crop(portrait.getbbox()) if self.agent else portrait.crop((100, 173, 960, 1220))
+            portrait_height = 380 if tall else 220
+            portrait = portrait.resize((round(portrait.width*portrait_height/portrait.height), portrait_height), Image.Resampling.LANCZOS)
+            alpha = np.asarray(portrait.getchannel("A"), dtype=np.float32)
+            fade = np.minimum(1, (portrait_height-1-np.arange(portrait_height))/32)[:, None]
+            portrait.putalpha(Image.fromarray((alpha*fade).astype(np.uint8)))
+            px = (1080-portrait.width)//2
+            py = 830 if tall else 600
+            portrait_box = (px, py, px+portrait.width, py+portrait_height)
+            if px < self.safe_left or px + portrait.width > self.safe_right:
+                raise ValueError(f"Retrato fuera de zona segura: {portrait_box}")
+            self.bounds.append({"type":"portrait", "text":self.agent["nombre"] if self.agent else "Nixon", "bbox":portrait_box})
+            image.alpha_composite(portrait, (px, py))
+        self.photo_footer(image, tall)
+        for index, first in enumerate(self.bounds):
+            for second in self.bounds[index+1:]:
+                x0,y0,x1,y1=first["bbox"]; u0,v0,u1,v1=second["bbox"]
+                if min(x1,u1)>max(x0,u0) and min(y1,v1)>max(y0,v0):
+                    raise ValueError(f"Elementos superpuestos: {first['text']} / {second['text']}")
+        return image.convert("RGB"), list(self.bounds)
+
     def make(self, post, fmt):
+        if self.style == "photo":
+            return self.make_photo_first(post, fmt)
         if self.style == "minimal":
             return self.make_minimal(post, fmt)
         size = FORMATS[fmt]
@@ -456,7 +557,7 @@ def main():
     ap.add_argument("--agente",type=Path,help="Carpeta del agente; lee agentes.json, foto_recorte.png y calendario_<id>.md")
     ap.add_argument("--pilot",action="store_true")
     ap.add_argument("--drive-authorized",action="store_true",help="Registra la autorización de carga del paquete a Google Drive")
-    ap.add_argument("--style",choices=("campaign","minimal"),default="campaign")
+    ap.add_argument("--style",choices=("campaign","minimal","photo"),default="campaign")
     ap.add_argument("--office-contact",help="Contacto público de RE/MAX Eleva; crea un paquete sin nombre ni retrato")
     ap.add_argument("--office-logo",type=Path,help="Logo oficial de RE/MAX Eleva para el paquete de oficina")
     args=ap.parse_args()
@@ -516,7 +617,7 @@ def main():
             for fmt in (FORMATS if index==1 else ["4x5"]):
                 img,bounds=artist.make(page,fmt)
                 folder="feed_4x5" if fmt=="4x5" else "historias_9x16"
-                if args.style == "minimal" and agent:
+                if args.style in ("minimal", "photo") and agent:
                     label=(f"CARRUSEL_{index:02d}" if len(pages)>1 else "PUBLICAR_SOLO") if fmt=="4x5" else "HISTORIA"
                     name=f"{agent['id']}_D{day:02d}_{label}_{fmt}.jpg"
                 else:

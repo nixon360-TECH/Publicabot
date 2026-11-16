@@ -1,4 +1,18 @@
-# HANDOFF — 2026-11-16 — N360-030
+# HANDOFF — 2026-11-16 — N360-031
+
+- **Producción terminada fuera de Git:** seis paquetes `artes_foto_dominante_v03`, uno por cada asesor y uno institucional. Cada paquete contiene 22 publicaciones 4:5 y 15 historias 9:16; total: 222 diseños.
+- **Dirección visual:** fotografía real a sangre, paneles navy translúcidos, degradados ligeros y amarillo limitado a datos clave. Se eliminó el gran bloque azul opaco que competía con las fotografías. Logos oficiales sin recolorear.
+- **Fotografías:** se localizaron nueve originales aéreos reales; siete cuentan con versión limpia aprobada y son las usadas en la campaña. Los dos originales adicionales no se incorporaron porque no tienen preparación limpia equivalente. No se generó ni alteró terreno, calles o infraestructura.
+- **Retratos:** se corrigió un recorte defectuoso a partir de la fotografía original y se regeneró el paquete afectado para actualizar sus hashes. El respaldo anterior permanece fuera de Git.
+- **IA y costo:** Higgsfield mostró saldo de cero créditos y sin acceso ilimitado activo; no se lanzó ninguna generación ni se incurrió en gasto. La extracción puntual del fondo del retrato se realizó con la herramienta de imagen integrada.
+- **Autorevisión:** los seis paquetes quedaron `READY_FOR_REVIEW`; 222/222 JPG aprobados en cantidad, dimensiones, decodificación, hashes, zonas seguras, recursos generales y revisión visual. La validación ahora separa calidad técnica de autorización para Drive.
+- **Privacidad:** nombres, teléfonos, retratos, copys, salidas y manifiestos personalizados permanecen fuera del repositorio público.
+- **Estado:** `READY_FOR_REVIEW`. `drive_upload_authorized=false`; no se reemplazó contenido en Drive, no se publicó en redes, no se envió a agentes y no se activó pauta.
+- **Evidencia Git:** rama `feature/N360-031-artes-foto-dominante`; `scripts/codex_artes_15d.py`; `scripts/qa_artes_agentes.py`; `tests/test_agent_art_campaign.py`.
+
+---
+
+## Handoff anterior — 2026-11-16 — N360-030
 
 - **Producción terminada fuera de Git:** segunda versión minimalista para cinco agentes y una versión institucional de oficina. Cada paquete contiene 22 publicaciones 4:5 y 15 historias 9:16; total: 222 diseños. Se conservó la versión anterior como historial.
 - **Dirección visual:** fotografía real dominante, menos texto, un solo mensaje principal, cierre compacto y paleta azul/amarilla. Los logos oficiales no se recolorearon. La versión de oficina no contiene nombre ni retrato de agente; usa únicamente la identidad y el contacto público verificado de RE/MAX Eleva.
