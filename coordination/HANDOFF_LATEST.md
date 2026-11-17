@@ -1,4 +1,17 @@
-# HANDOFF — 2026-11-16 — N360-031
+# HANDOFF — 2026-11-16 — N360-032
+
+- **Corrección terminada fuera de Git:** cuatro piezas D10 de un agente, feed e historia en los paquetes `artes` y `artes_minimalistas_v02`, fueron regeneradas con el `foto_recorte.png` corregido por Claude Code. Los JPG anteriores y sus manifiestos quedaron respaldados en la carpeta de trabajo del agente.
+- **Causa confirmada:** el recorte anterior no conservaba hombros. Claude Code ajustó la medición del recortador de 50 % a 70 % de la altura para encuadres cerrados; Codex consumió el PNG corregido sin volver a modificarlo.
+- **QA reforzado:** `scripts/qa_artes_agentes.py` ahora mide la máscara alfa y exige expansión de hombros bajo el rostro. También registra una revisión visual específica del retrato renderizado. Ya no basta con marcar manualmente `visual_review: PASSED`.
+- **Auditoría completa:** los D10 de los otros cuatro agentes se revisaron en ambos estilos y formatos. Las fuentes y el template conservan hombros; 10/10 paquetes anteriores quedaron `READY_FOR_REVIEW` con cero errores.
+- **Drive N360-031 completado:** la versión foto dominante v03 fue aprobada por Nixon y cargada. Las versiones antiguas se movieron al archivo interno, los videos permanecieron intactos y se eliminaron 37 duplicados creados por un primer intento de carga. Verificación final: seis destinatarios con 22 publicaciones y 15 historias cada uno.
+- **Privacidad:** ningún nombre, teléfono, retrato, vínculo privado ni manifiesto personalizado se incorporó al repositorio público.
+- **Estado:** `DONE`. No se publicó en redes ni se activó pauta.
+- **Evidencia Git:** rama `feature/N360-032-gerson-d10-recorte`; `scripts/qa_artes_agentes.py`; `tests/test_agent_art_campaign.py`.
+
+---
+
+## Handoff anterior — 2026-11-16 — N360-031
 
 - **Producción terminada fuera de Git:** seis paquetes `artes_foto_dominante_v03`, uno por cada asesor y uno institucional. Cada paquete contiene 22 publicaciones 4:5 y 15 historias 9:16; total: 222 diseños.
 - **Dirección visual:** fotografía real a sangre, paneles navy translúcidos, degradados ligeros y amarillo limitado a datos clave. Se eliminó el gran bloque azul opaco que competía con las fotografías. Logos oficiales sin recolorear.
@@ -7,7 +20,7 @@
 - **IA y costo:** Higgsfield mostró saldo de cero créditos y sin acceso ilimitado activo; no se lanzó ninguna generación ni se incurrió en gasto. La extracción puntual del fondo del retrato se realizó con la herramienta de imagen integrada.
 - **Autorevisión:** los seis paquetes quedaron `READY_FOR_REVIEW`; 222/222 JPG aprobados en cantidad, dimensiones, decodificación, hashes, zonas seguras, recursos generales y revisión visual. La validación ahora separa calidad técnica de autorización para Drive.
 - **Privacidad:** nombres, teléfonos, retratos, copys, salidas y manifiestos personalizados permanecen fuera del repositorio público.
-- **Estado:** `READY_FOR_REVIEW`. `drive_upload_authorized=false`; no se reemplazó contenido en Drive, no se publicó en redes, no se envió a agentes y no se activó pauta.
+- **Estado histórico al cierre local:** `READY_FOR_REVIEW`. La carga fue autorizada y completada posteriormente dentro de N360-032; no se publicó en redes, no se envió a agentes y no se activó pauta.
 - **Evidencia Git:** rama `feature/N360-031-artes-foto-dominante`; `scripts/codex_artes_15d.py`; `scripts/qa_artes_agentes.py`; `tests/test_agent_art_campaign.py`.
 
 ---

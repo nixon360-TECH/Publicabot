@@ -2,7 +2,10 @@ import tempfile
 import unittest
 from pathlib import Path
 
+from PIL import Image, ImageDraw
+
 from scripts.codex_artes_15d import Artist, caption, create_agent_resources, create_gallery, create_readme_html, office_caption, parse_agent_calendar, split_display_name
+from scripts.qa_artes_agentes import portrait_source_metrics
 
 
 class AgentArtCampaignTests(unittest.TestCase):
@@ -82,6 +85,20 @@ class AgentArtCampaignTests(unittest.TestCase):
         result = office_caption(post, kit, "+503 0000 0000", "50300000000")
         self.assertIn("+503 0000 0000", result)
         self.assertIn("wa.me/50300000000", result)
+
+    def test_portrait_qa_requires_shoulders_below_face(self):
+        with tempfile.TemporaryDirectory() as directory:
+            good = Path(directory) / "good.png"
+            bad = Path(directory) / "bad.png"
+            for path, with_shoulders in ((good, True), (bad, False)):
+                image = Image.new("RGBA", (400, 600), (0, 0, 0, 0))
+                draw = ImageDraw.Draw(image)
+                draw.ellipse((120, 30, 280, 250), fill=(255, 255, 255, 255))
+                if with_shoulders:
+                    draw.polygon(((170, 210), (40, 500), (360, 500), (230, 210)), fill=(255, 255, 255, 255))
+                image.save(path)
+            self.assertTrue(portrait_source_metrics(good)["passed"])
+            self.assertFalse(portrait_source_metrics(bad)["passed"])
 
 
 if __name__ == "__main__":
