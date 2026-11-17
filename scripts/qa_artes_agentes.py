@@ -19,6 +19,37 @@ def sha256(path):
     return digest.hexdigest()
 
 
+def portrait_source_metrics(path):
+    """Comprueba que el recorte tenga expansión visible de hombros bajo el rostro."""
+    with Image.open(path) as image:
+        alpha = image.convert("RGBA").getchannel("A")
+    bbox = alpha.getbbox()
+    if not bbox:
+        return {"passed": False, "reason": "retrato transparente"}
+    x0, y0, x1, y1 = bbox
+    active_width = x1 - x0
+    active_height = y1 - y0
+
+    def row_width(fraction):
+        y = min(y1 - 1, y0 + int(active_height * fraction))
+        row = alpha.crop((0, y, alpha.width, y + 1)).getbbox()
+        return 0 if not row else row[2] - row[0]
+
+    face_width = row_width(0.50)
+    shoulder_width = row_width(0.85)
+    shoulder_growth = shoulder_width / max(face_width, 1)
+    shoulder_fill = shoulder_width / max(active_width, 1)
+    passed = shoulder_growth >= 1.25 and shoulder_fill >= 0.75
+    return {
+        "passed": passed,
+        "active_bbox": [x0, y0, x1, y1],
+        "face_width_px": face_width,
+        "shoulder_width_px": shoulder_width,
+        "shoulder_growth": round(shoulder_growth, 3),
+        "shoulder_fill": round(shoulder_fill, 3),
+    }
+
+
 def validate(package, visual_reviewed=False, require_drive_authorization=False):
     manifest = json.loads((package / "manifest.json").read_text(encoding="utf8"))
     outputs = manifest["outputs"]
@@ -65,12 +96,29 @@ def validate(package, visual_reviewed=False, require_drive_authorization=False):
             errors.append("electricidad no está bloqueada")
     if require_drive_authorization and not manifest.get("drive_upload_authorized"):
         errors.append("autorización de Drive ausente")
+    portrait_inputs = [
+        Path(item["path"])
+        for item in manifest.get("inputs", [])
+        if Path(item["path"]).name == "foto_recorte.png"
+    ]
+    portrait_metrics = None
+    if portrait_inputs:
+        portrait_path = portrait_inputs[0]
+        if not portrait_path.is_file():
+            errors.append("foto_recorte.png no disponible para QA")
+        else:
+            portrait_metrics = portrait_source_metrics(portrait_path)
+            if not portrait_metrics["passed"]:
+                errors.append("retrato sin expansión suficiente de hombros")
     report = json.loads((package / "qa_report.json").read_text(encoding="utf8"))
     report.update(
         {
             "status": "READY_FOR_REVIEW" if not errors and visual_reviewed else "BLOCKED_QA" if errors else "DRAFT_FOR_USER_REVIEW",
             "visual_review": "PASSED" if visual_reviewed else "PENDING",
+            "portrait_render_visual_review": "PASSED" if visual_reviewed and portrait_metrics else "NOT_APPLICABLE" if not portrait_metrics else "PENDING",
             "technical_review": "PASSED" if not errors else "FAILED",
+            "portrait_source_verified": portrait_metrics["passed"] if portrait_metrics else None,
+            "portrait_source_metrics": portrait_metrics,
             "resources_verified": not errors,
             "errors": errors,
         }
